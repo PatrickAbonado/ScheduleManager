@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="capstone.schedulemanager.controller.UpdateCustomerController">
+   <content>
+      <AnchorPane prefHeight="657.0" prefWidth="990.0">
+         <children>
+            <TableView fx:id="updateCustAptTable" layoutX="106.0" layoutY="107.0" prefHeight="200.0" prefWidth="778.0">
+               <columns>
+                  <TableColumn fx:id="updateCustAptAptIdCol" prefWidth="46.4000244140625" text="Apt ID" />
+                  <TableColumn fx:id="updateCustAptTitCol" prefWidth="55.20001220703125" text="Title" />
+                  <TableColumn fx:id="updateCustAptDescCol" prefWidth="172.00001525878906" text="Description" />
+                  <TableColumn fx:id="updateCustAptLocCol" prefWidth="73.5999755859375" text="Location" />
+                  <TableColumn fx:id="updateCustAptTypeCol" prefWidth="60.0" text="Type" />
+                  <TableColumn fx:id="updateCustAptStrtCol" prefWidth="95.2000732421875" text="Start" />
+                  <TableColumn fx:id="updateCustAptEndCol" prefWidth="94.4000244140625" text="End" />
+                  <TableColumn fx:id="updateCustAptContIdCol" prefWidth="71.9998779296875" text="Contact ID" />
+                  <TableColumn fx:id="updateCustAptUseIdCol" prefWidth="54.39990234375" text="User ID" />
+                  <TableColumn fx:id="updateCustAptCustIdCol" prefWidth="52.800048828125" text="Cust ID" />
+               </columns>
+            </TableView>
+            <Label layoutX="107.0" layoutY="371.0" text="Cust. ID" />
+            <Label layoutX="106.0" layoutY="414.0" text="Name" />
+            <Label layoutX="106.0" layoutY="455.0" text="Address" />
+            <Label layoutX="106.0" layoutY="492.0" text="Postal Code" />
+            <TextField fx:id="updateCustCustIdTex" editable="false" layoutX="205.0" layoutY="367.0" />
+            <TextField fx:id="updateCustNameTex" layoutX="205.0" layoutY="410.0" />
+            <TextField fx:id="updateCustAddressTex" layoutX="205.0" layoutY="451.0" />
+            <TextField fx:id="updateCustPstCdTex" layoutX="205.0" layoutY="488.0" />
+            <Label layoutX="487.0" layoutY="371.0" text="Phone" />
+            <Label fx:id="updtCustCtryLab" layoutX="487.0" layoutY="414.0" text="Country" />
+            <Label fx:id="updtCustStePrvLab" layoutX="486.0" layoutY="454.0" prefHeight="18.0" prefWidth="85.0" text="State/Province" />
+            <TextField fx:id="updateCustPhnTex" layoutX="609.0" layoutY="367.0" prefHeight="26.0" prefWidth="150.0" />
+            <Button fx:id="updateCustSvBut" layoutX="609.0" layoutY="488.0" mnemonicParsing="false" onAction="#onUpdateCustSvButClick" prefHeight="25.0" prefWidth="57.0" text="Save" />
+            <Button fx:id="updateCustCancBut" layoutX="701.0" layoutY="488.0" mnemonicParsing="false" onAction="#onUpdateCustCancButClick" prefHeight="25.0" prefWidth="57.0" text="Cancel" />
+            <Label fx:id="updtCustTitLab" layoutX="402.0" layoutY="20.0" text="Update Customer">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Button fx:id="updateCustUpdtAptBut" layoutX="697.0" layoutY="308.0" mnemonicParsing="false" onAction="#onUpdateCustUpdtButClick" prefHeight="25.0" prefWidth="57.0" text="Update" />
+            <ComboBox fx:id="updateCustStPrvComb" layoutX="609.0" layoutY="451.0" prefWidth="150.0" />
+            <RadioButton fx:id="updateCustAllRadio" layoutX="230.0" layoutY="308.0" mnemonicParsing="false" onAction="#onUpdateCustAptAllRadioClick" selected="true" text="All">
+               <toggleGroup>
+                  <ToggleGroup fx:id="byAll" />
+               </toggleGroup>
+            </RadioButton>
+            <ComboBox fx:id="updateCustCtyComb" layoutX="609.0" layoutY="410.0" onAction="#onUpdateCustCtyCombClick" prefWidth="150.0" />
+            <Button fx:id="updateCustAddAptBut" layoutX="762.0" layoutY="308.0" mnemonicParsing="false" onAction="#onUpdateCustAddAptBut" prefHeight="25.0" prefWidth="57.0" text="Add" />
+            <Label fx:id="updateCustMsgLab" layoutX="110.0" layoutY="549.0" text="MessageLabel">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Button fx:id="updateCustDeleteAptBut" layoutX="827.0" layoutY="308.0" mnemonicParsing="false" onAction="#onUpdateCustDeleteAptButClick" prefHeight="25.0" prefWidth="57.0" text="Delete" />
+            <RadioButton fx:id="updtCustByMonRad" layoutX="105.0" layoutY="308.0" mnemonicParsing="false" onAction="#onUpdtCustByMonRadClick" text="Month" toggleGroup="$byAll" />
+            <RadioButton fx:id="updtCustByWeekRad" layoutX="170.0" layoutY="308.0" mnemonicParsing="false" onAction="#onUpdtCustByWeekRadClick" text="Week" toggleGroup="$byAll" />
+         </children>
+      </AnchorPane>
+   </content>
+</ScrollPane>

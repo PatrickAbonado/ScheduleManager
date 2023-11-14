@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="capstone.schedulemanager.controller.ReportsController">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="900.0" prefWidth="650.0">
+         <children>
+            <Label layoutX="308.0" layoutY="41.0" text="Reports">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="455.0" layoutY="450.0" text="Contact" />
+             <Label layoutX="33.0" layoutY="639.0" text="User Productivity:">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
+            <Label layoutX="33.0" layoutY="407.0" text="Contact Schedule:">
+
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="131.0" layoutY="188.0" text="Month" />
+            <Label layoutX="33.0" layoutY="145.0" text="Appointments Total:">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="repMonCom" layoutX="175.0" layoutY="183.0" onAction="#onRepMonComClick" prefHeight="26.0" prefWidth="115.0" />
+            <ComboBox fx:id="repAptByConConCom" layoutX="507.0" layoutY="445.0" onAction="#onRepAptByConConComClick" prefHeight="26.0" prefWidth="115.0" />
+            <TableView fx:id="repAptMonTotTab" layoutX="70.0" layoutY="211.0" prefHeight="138.0" prefWidth="220.0">
+              <columns>
+                <TableColumn fx:id="repMonTotTypCol" prefWidth="120.0" text="Type" />
+                <TableColumn fx:id="repMonTotTotCol" prefWidth="100.0" text="Total" />
+              </columns>
+            </TableView>
+            <TableView fx:id="repAptByConTab" layoutX="70.0" layoutY="473.0" prefHeight="138.0" prefWidth="553.0">
+              <columns>
+                <TableColumn fx:id="repAptByConAptIdCol" prefWidth="51.999969482421875" text="Apt ID" />
+                <TableColumn fx:id="repAptByConTitCol" prefWidth="50.0" text="Title" />
+                  <TableColumn fx:id="repAptByConTypCol" prefWidth="55.0" text="Type" />
+                  <TableColumn fx:id="repAptByConDescCol" prefWidth="121.59992980957031" text="Description" />
+                  <TableColumn fx:id="repAptByConStrtCol" prefWidth="82.4000244140625" text="Start" />
+                  <TableColumn fx:id="repAptByConEndCol" prefWidth="72.7999267578125" text="End" />
+                  <TableColumn fx:id="repAptByConCustIdCol" prefWidth="54.4000244140625" text="Cust ID" />
+                  <TableColumn fx:id="repAptByConCstNmCol" prefWidth="67.2000732421875" text="Name" />
+              </columns>
+            </TableView>
+            <TableView fx:id="repAptUsrProdTab" layoutX="70.0" layoutY="695.0" prefHeight="138.0" prefWidth="293.0">
+              <columns>
+                <TableColumn fx:id="repAptUsrIdCol" prefWidth="75.0" text="User ID" />
+                  <TableColumn fx:id="repAptUsrNmCol" prefWidth="75.0" text="Name" />
+                <TableColumn fx:id="repAptUsrCrtCol" prefWidth="75.0" text="Created" />
+                  <TableColumn fx:id="repAptUsrUpdtCol" prefWidth="75.0" text="Updated" />
+              </columns>
+            </TableView>
+            <Button fx:id="repAptUsrMenuBut" layoutX="565.0" layoutY="807.0" mnemonicParsing="false" onAction="#onRepAptUsrMenuBut" prefHeight="25.0" prefWidth="77.0" text="Main Menu" />
+         </children></AnchorPane>
+  </content>
+</ScrollPane>

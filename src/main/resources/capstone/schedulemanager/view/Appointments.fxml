@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="751.0" prefWidth="1004.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="capstone.schedulemanager.controller.AppointmentsController">
+
+    <TableView fx:id="addAptAptTable" layoutX="100.0" layoutY="303.0" prefHeight="124.0" prefWidth="790.0">
+        <columns>
+            <TableColumn fx:id="aptCustAptIdCol" prefWidth="46.4000244140625" text="Apt ID" />
+            <TableColumn fx:id="aptCustAptTitCol" prefWidth="55.20001220703125" text="Title" />
+            <TableColumn fx:id="aptCustAptDescCol" prefWidth="124.00006103515625" text="Description" />
+            <TableColumn fx:id="aptCustAptLocCol" prefWidth="83.199951171875" text="Location" />
+            <TableColumn fx:id="aptCustAptTypeCol" prefWidth="69.5999755859375" text="Type" />
+            <TableColumn fx:id="aptCustAptStrtCol" prefWidth="109.60006713867188" text="Start" />
+            <TableColumn fx:id="aptCustAptEndCol" text="End" />
+            <TableColumn fx:id="aptCustAptCntNmCol" prefWidth="92.800048828125" text="Contact Name" />
+            <TableColumn fx:id="aptCustAptContIdCol" prefWidth="65.5999755859375" text="Contact ID" />
+            <TableColumn fx:id="aptCustAptCustIdCol" prefWidth="66.4000244140625" text="User ID" />
+        </columns>
+    </TableView>
+
+    <TableView fx:id="aptAllAptTable" layoutX="104.0" layoutY="85.0" prefHeight="124.0" prefWidth="816.0">
+        <columns>
+            <TableColumn fx:id="aptAllAptIdCol" prefWidth="46.4000244140625" text="Apt ID" />
+            <TableColumn fx:id="aptAllCustCustNmCol" prefWidth="75.199951171875" text="Customer" />
+            <TableColumn fx:id="aptAllTitCol" prefWidth="55.20001220703125" text="Title" />
+            <TableColumn fx:id="aptAllDescCol" prefWidth="172.00001525878906" text="Description" />
+            <TableColumn fx:id="aptAllLocCol" prefWidth="73.5999755859375" text="Location" />
+            <TableColumn fx:id="aptAllTypeCol" prefWidth="60.0" text="Type" />
+            <TableColumn fx:id="aptAllStrtCol" prefWidth="79.199951171875" text="Start" />
+            <TableColumn fx:id="aptAllEndCol" prefWidth="69.60009765625" text="End" />
+            <TableColumn fx:id="aptAllContNameCol" prefWidth="68.7999267578125" text="Contact" />
+         <TableColumn fx:id="aptAllCustCustIdCol" prefWidth="61.5999755859375" text="Cust. ID" />
+            <TableColumn fx:id="aptAllCustUsrIdCol" prefWidth="50.4000244140625" text="User ID" />
+        </columns>
+    </TableView>
+    
+    <Label fx:id="custAptTitLab" layoutX="391.0" layoutY="260.0" text="Customer Appointments">
+        <font>
+            <Font size="20.0" />
+        </font>
+    </Label>
+    <Label layoutX="570.0" layoutY="585.0" text="Apt. ID" />
+    <Label layoutX="297.0" layoutY="503.0" text="Title" />
+    <Label layoutX="439.0" layoutY="503.0" text="Description" />
+    <Label layoutX="685.0" layoutY="503.0" text="Location" />
+    <Label layoutX="570.0" layoutY="541.0" text="Type" />
+    <TextField fx:id="addAptAptIdText" editable="false" layoutX="621.0" layoutY="580.0" prefHeight="26.0" prefWidth="46.0" promptText="Auto" />
+    <TextField fx:id="addAptTitText" layoutX="355.0" layoutY="499.0" prefHeight="26.0" prefWidth="61.0" />
+    <TextField fx:id="addAptDescText" layoutX="530.0" layoutY="498.0" prefHeight="26.0" prefWidth="137.0" />
+    <TextField fx:id="addAptLocText" layoutX="740.0" layoutY="499.0" />
+    <TextField fx:id="addAptTypText" layoutX="621.0" layoutY="538.0" prefHeight="26.0" prefWidth="46.0" />
+    <Label layoutX="685.0" layoutY="542.0" text="Contact" />
+    <Label layoutX="97.0" layoutY="542.0" text="Start:" />
+    <Label layoutX="97.0" layoutY="585.0" text="End:" />
+    <ComboBox fx:id="addAptContComb" layoutX="740.0" layoutY="538.0" prefWidth="150.0" />
+    <Label layoutX="439.0" layoutY="542.0" text="Cust. ID" />
+    <Label layoutX="439.0" layoutY="585.0" text="User ID" />
+    <ComboBox fx:id="addAptStrtHrComb" layoutX="191.0" layoutY="537.0" prefHeight="26.0" prefWidth="70.0" />
+    <ComboBox fx:id="addAptEndHrComb" layoutX="191.0" layoutY="580.0" prefHeight="26.0" prefWidth="70.0" />
+    <ComboBox fx:id="addAptStrtMinComb" layoutX="356.0" layoutY="537.0" prefHeight="26.0" prefWidth="58.0" />
+    <ComboBox fx:id="addAptEndMinComb" layoutX="356.0" layoutY="580.0" prefHeight="26.0" prefWidth="58.0" />
+    <Button fx:id="addAptSvBut" layoutX="833.0" layoutY="580.0" mnemonicParsing="false" onAction="#onAptSaveClick" prefHeight="25.0" prefWidth="57.0" text="Save" />
+    <Button fx:id="addAptCancBut" layoutX="740.0" layoutY="580.0" mnemonicParsing="false" onAction="#onAddAptCancelClick" prefHeight="25.0" prefWidth="57.0" text="Cancel" />
+   <Button fx:id="addAptUpdtBut" layoutX="770.0" layoutY="430.0" mnemonicParsing="false" onAction="#onAptCustUpdtButClick" prefHeight="25.0" prefWidth="57.0" text="Update" />
+   <Label layoutX="263.0" layoutY="435.0" text="By Week" />
+   <Label layoutX="105.0" layoutY="435.0" text="By Month" />
+   <ComboBox fx:id="addAptByMonComb" layoutX="171.0" layoutY="430.0" onAction="#onAddAptByMonCombClick" prefHeight="26.0" prefWidth="69.0" />
+   <Label layoutX="149.0" layoutY="542.0" text="Hour" />
+   <Label layoutX="297.0" layoutY="542.0" text="Minute" />
+   <Label layoutX="149.0" layoutY="584.0" text="Hour" />
+   <Label layoutX="297.0" layoutY="584.0" text="Minute" />
+   <Label fx:id="addAppCnSvMesLab" layoutX="101.0" layoutY="641.0" text="Message">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Label>
+   <DatePicker fx:id="addAptDatePick" layoutX="149.0" layoutY="499.0" prefHeight="26.0" prefWidth="114.0" />
+   <Label layoutX="97.0" layoutY="503.0" text="Date:" />
+   <DatePicker fx:id="aptCustAptByWeekDtPk" layoutX="320.0" layoutY="430.0" onAction="#onAptCustAptByWeekDtPkClick" prefHeight="26.0" prefWidth="94.0" />
+   <Label layoutX="419.0" layoutY="35.0" text="All Appointments">
+      <font>
+         <Font size="20.0" />
+      </font>
+   </Label>
+   <Button fx:id="aptAllCustAptUpdtBut" layoutX="800.0" layoutY="212.0" mnemonicParsing="false" onAction="#onAptAllCustAptUpdtBut" prefHeight="25.0" prefWidth="57.0" text="Update" />
+   <Label layoutX="104.0" layoutY="217.0" text="By Month" />
+   <DatePicker fx:id="aptAllAptByWkDtPk" layoutX="324.0" layoutY="212.0" onAction="#onAptAllAptByWkDtPkClick" prefHeight="26.0" prefWidth="94.0" />
+   <Label layoutX="263.0" layoutY="217.0" text="By Week" />
+   <RadioButton fx:id="aptAllAptByAllRad" layoutX="434.0" layoutY="216.0" mnemonicParsing="false" onAction="#onAptAllAptByAllRadClick" selected="true" text="By All">
+      <toggleGroup>
+         <ToggleGroup fx:id="aptAllAptbyAllTog" />
+      </toggleGroup>
+   </RadioButton>
+   <RadioButton fx:id="aptCustAptByAllRad" layoutX="434.0" layoutY="439.0" mnemonicParsing="false" onAction="#onAptCustAptByAllRadClick" selected="true" text="By All">
+      <toggleGroup>
+         <ToggleGroup fx:id="aptCustAptbyAllTog" />
+      </toggleGroup>
+   </RadioButton>
+   <ComboBox fx:id="aptAllAptByMonComb" layoutX="170.0" layoutY="212.0" onAction="#onAptAllAptByMonCombClick" prefHeight="26.0" prefWidth="70.0" />
+   <Button fx:id="aptCustAddtBut" layoutX="707.0" layoutY="430.0" mnemonicParsing="false" onAction="#onAptCustAddAptButClick" prefHeight="25.0" prefWidth="57.0" text="Add" />
+   <Button fx:id="aptAllAptDelBut" layoutX="862.0" layoutY="212.0" mnemonicParsing="false" onAction="#onAptAllAptDelButClick" prefHeight="25.0" prefWidth="57.0" text="Delete" />
+   <Button fx:id="aptCustAptDelBut" layoutX="833.0" layoutY="430.0" mnemonicParsing="false" onAction="#onAptCustAptDelButClick" prefHeight="25.0" prefWidth="57.0" text="Delete" />
+   <ComboBox fx:id="aptCstIdCom" layoutX="496.0" layoutY="536.0" onAction="#onAptCstIdComClick" prefHeight="26.0" prefWidth="61.0" />
+   <ComboBox fx:id="aptUsrIdCom" layoutX="495.0" layoutY="580.0" prefHeight="26.0" prefWidth="62.0" />
+   <Button fx:id="aptAllAptAddBut" layoutX="738.0" layoutY="212.0" mnemonicParsing="false" onAction="#onAptAllAptAddButClick" prefHeight="25.0" prefWidth="57.0" text="Add" />
+
+</AnchorPane>

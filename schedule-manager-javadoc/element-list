@@ -1,0 +1,6 @@
+module:capstone.schedulemanager
+capstone.schedulemanager
+capstone.schedulemanager.controller
+capstone.schedulemanager.dao
+capstone.schedulemanager.model
+capstone.schedulemanager.utilities

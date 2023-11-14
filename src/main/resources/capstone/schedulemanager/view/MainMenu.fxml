@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="capstone.schedulemanager.controller.MainMenuController">
+   <content>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="693.0" prefWidth="1012.0">
+         <children>
+            <TableView fx:id="menuCustomerTable" layoutX="122.0" layoutY="362.0" prefHeight="162.0" prefWidth="778.0">
+               <columns>
+                  <TableColumn fx:id="menuCustIDCol" prefWidth="47.999996185302734" text="Cust ID" />
+                  <TableColumn fx:id="menuCustNameCol" prefWidth="128.00000762939453" text="Name" />
+                  <TableColumn fx:id="menuCustAdrsCol" prefWidth="195.20001220703125" text="Address" />
+                  <TableColumn fx:id="menuCustPhoneCol" prefWidth="107.19998168945312" text="Phone" />
+                  <TableColumn fx:id="menuCustPostCol" prefWidth="84.79998779296875" text="Postal" />
+                  <TableColumn fx:id="menuCustDivCol" prefWidth="63.199951171875" text="Division" />
+                  <TableColumn fx:id="menuCustDivNmeCol" prefWidth="75.0" text="City/Prvn" />
+                  <TableColumn fx:id="menuCustCtryNmeCol" prefWidth="75.0" text="Country" />
+               </columns>
+            </TableView>
+            <TableView fx:id="menuAptTable" layoutX="122.0" layoutY="79.0" prefHeight="162.0" prefWidth="778.0">
+               <columns>
+                  <TableColumn fx:id="menuAptAptIdCol" prefWidth="46.4000244140625" text="Apt ID" />
+                  <TableColumn fx:id="menuAptCustNmCol" prefWidth="75.0" text="Customer" />
+                  <TableColumn fx:id="menuAptTitCol" prefWidth="55.20001220703125" text="Title" />
+                  <TableColumn fx:id="menuAptDescCol" prefWidth="172.00001525878906" text="Description" />
+                  <TableColumn fx:id="menuAptLocCol" prefWidth="73.5999755859375" text="Location" />
+                  <TableColumn fx:id="menuAptTypeCol" prefWidth="60.0" text="Type" />
+                  <TableColumn fx:id="menuAptStrtCol" prefWidth="95.2000732421875" text="Start" />
+                  <TableColumn fx:id="menuAptEndCol" prefWidth="94.4000244140625" text="End" />
+                  <TableColumn fx:id="menuAptContIdCol" prefWidth="71.9998779296875" text="Contact ID" />
+                  <TableColumn fx:id="menuAptUseIdCol" prefWidth="52.800048828125" text="Cust ID" />
+                  <TableColumn fx:id="menuAptCustIdCol" prefWidth="54.39990234375" text="User ID" />
+               </columns>
+            </TableView>
+            <Label layoutX="464.0" layoutY="302.0" text="Customers">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="448.0" layoutY="25.0" text="Appointments">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="menuMintAlertLab" alignment="TOP_LEFT" layoutX="122.0" layoutY="590.0" prefHeight="107.0" prefWidth="559.0" text="15 min Alert">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Button fx:id="menuAptExitBut" layoutX="844.0" layoutY="590.0" mnemonicParsing="false" onAction="#onMenuExitButClick" prefHeight="25.0" prefWidth="57.0" text="Exit" />
+            <Button fx:id="menuAptRepBut" layoutX="780.0" layoutY="590.0" mnemonicParsing="false" onAction="#onMenuReptButClick" prefHeight="25.0" prefWidth="57.0" text="Reports" />
+            <Button fx:id="menuCustAddBut" layoutX="716.0" layoutY="528.0" mnemonicParsing="false" onAction="#onMenuCustAddButClick" prefHeight="25.0" prefWidth="57.0" text="Add" />
+            <Button fx:id="menuCustUpdtBut" layoutX="780.0" layoutY="528.0" mnemonicParsing="false" onAction="#onMenuCustUpdtButClick" prefHeight="25.0" prefWidth="57.0" text="Update" />
+            <Button fx:id="menuAptUpdtBut" layoutX="777.0" layoutY="248.0" mnemonicParsing="false" onAction="#onMenuAptUpdtButClick" prefHeight="25.0" prefWidth="57.0" text="Update" />
+            <Button fx:id="menuAptDelBut" layoutX="842.0" layoutY="247.0" mnemonicParsing="false" onAction="#onMenuAptDelButClick" prefHeight="25.0" prefWidth="57.0" text="Delete" />
+            <Button fx:id="menuCustDelBut" layoutX="844.0" layoutY="528.0" mnemonicParsing="false" onAction="#onMenuCustDelButClick" prefHeight="25.0" prefWidth="57.0" text="Delete" />
+            <RadioButton fx:id="menuCustApptByAllRad" layoutX="258.0" layoutY="244.0" mnemonicParsing="false" onAction="#onMenuCustApptByAllRadClick" selected="true" text="All">
+               <toggleGroup>
+                  <ToggleGroup fx:id="byAll" />
+               </toggleGroup>
+            </RadioButton>
+            <Button fx:id="menuAptAddBut" layoutX="710.0" layoutY="247.0" mnemonicParsing="false" onAction="#onMenuAptAddButClick" prefHeight="25.0" prefWidth="57.0" text="Add" />
+            <RadioButton fx:id="menuAptByMonRad" layoutX="122.0" layoutY="244.0" mnemonicParsing="false" onAction="#onMenuAptByMonRadClick" text="Month" toggleGroup="$byAll" />
+            <RadioButton fx:id="menuAptByWeekRad" layoutX="190.0" layoutY="244.0" mnemonicParsing="false" onAction="#onMenuAptByWeekRadClick" text="Week" toggleGroup="$byAll" />
+            <Button fx:id="mainAptsSrchBut" layoutX="842.0" layoutY="51.0" mnemonicParsing="false" onAction="#onMainAptsSrchButClick" prefHeight="25.0" prefWidth="57.0" text="Search" />
+            <TextField fx:id="mainAptsSrchTxt" layoutX="690.0" layoutY="51.0" prefHeight="25.0" prefWidth="150.0" promptText="Name or Date Numbers" />
+            <Button fx:id="mainCustSrchBut" layoutX="842.0" layoutY="334.0" mnemonicParsing="false" onAction="#onMainCustSrchButClick" prefHeight="25.0" prefWidth="57.0" text="Search" />
+            <TextField fx:id="mainCustSrchTxt" layoutX="690.0" layoutY="334.0" prefHeight="25.0" prefWidth="150.0" promptText="Name or Phone Numbers" />
+            <RadioButton fx:id="mainCustAllRadio" layoutX="121.0" layoutY="528.0" mnemonicParsing="false" onAction="#mainCustAllRadioClick" selected="true" text="All">
+               <toggleGroup>
+                  <ToggleGroup fx:id="allCustRadTog" />
+               </toggleGroup>
+            </RadioButton>
+         </children>
+      </AnchorPane>
+   </content>
+</ScrollPane>
