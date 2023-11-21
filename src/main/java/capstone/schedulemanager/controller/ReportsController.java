@@ -98,7 +98,7 @@ public class ReportsController implements Initializable {
         repAptUsrIdCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
         repAptUsrNmCol.setCellValueFactory(new PropertyValueFactory<>("userName"));
         repAptUsrCrtCol.setCellValueFactory(new PropertyValueFactory<>("createdDate"));
-        repAptUsrUpdtCol.setCellValueFactory(new PropertyValueFactory<>("updated"));
+        repAptUsrUpdtCol.setCellValueFactory(new PropertyValueFactory<>("updatedDate"));
 
     }
 
