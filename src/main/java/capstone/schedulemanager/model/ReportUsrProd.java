@@ -4,15 +4,15 @@ package capstone.schedulemanager.model;
 public class ReportUsrProd {
     private int userId;
     private String userName;
-    private int created;
-    private int updated;
+    private int createdDate;
+    private int updatedDate;
 
     /** This is the constructor of Reported User Productivity objects.*/
-    public ReportUsrProd(int userId, String userName, int created, int updated){
+    public ReportUsrProd(int userId, String userName, int createdDate, int updatedDate){
         this.userId = userId;
         this.userName = userName;
-        this.created = created;
-        this.updated = updated;
+        this.createdDate = createdDate;
+        this.updatedDate = updatedDate;
     }
 
     /**
@@ -32,29 +32,29 @@ public class ReportUsrProd {
     /**
      * @return the created
      */
-    public int getCreated() {
-        return created;
+    public int getCreatedDate() {
+        return createdDate;
     }
 
     /**
-     * @param created the created to set
+     * @param createdDate the created to set
      */
-    public void setCreated(int created) {
-        this.created = created;
+    public void setCreatedDate(int createdDate) {
+        this.createdDate = createdDate;
     }
 
     /**
      * @return the updated
      */
-    public int getUpdated() {
-        return updated;
+    public int getUpdatedDate() {
+        return updatedDate;
     }
 
     /**
-     * @param updated the updated to set
+     * @param updatedDate the updated to set
      */
-    public void setUpdated(int updated) {
-        this.updated = updated;
+    public void setUpdatedDate(int updatedDate) {
+        this.updatedDate = updatedDate;
     }
 
     /**
