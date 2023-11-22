@@ -726,30 +726,35 @@ public class AppointmentsController implements Initializable {
 
         if(choice.isPresent() && choice.get() == ButtonType.OK){
             check = AppointmentsData.deleteAppointment(aptToDelete.getAppointmentId());
-        }
 
-        if(check > 0){
 
-            helpers.getAptDeleteSucsMesg(aptToDelete);
+            if(check > 0){
 
-            if(AppointmentsController.getAptToUpdate().getAppointmentId() == aptToDelete.getAppointmentId()){
-                setIsAptUpdtOnly(false);
+                helpers.getAptDeleteSucsMesg(aptToDelete);
+
+                if(AppointmentsController.getAptToUpdate().getAppointmentId() == aptToDelete.getAppointmentId()){
+                    setIsAptUpdtOnly(false);
+                }
+
+                FXMLLoader fxmlLoader = new FXMLLoader(Driver.class.getResource("/capstone/schedulemanager/view/Appointments.fxml"));
+                Stage stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
+                Scene scene = null;
+                try {
+                    scene = new Scene(fxmlLoader.load(), 1000, 700);
+                } catch (IOException e) {
+                    helpers.pageLoadErrMsg();
+                }
+                stage.setScene(scene);
+                stage.show();
+            }
+            else{
+                addAppCnSvMesLab.setText(rb.getString("sqlConnErrStmt"));
             }
 
-            FXMLLoader fxmlLoader = new FXMLLoader(Driver.class.getResource("/capstone/schedulemanager/view/Appointments.fxml"));
-            Stage stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
-            Scene scene = null;
-            try {
-                scene = new Scene(fxmlLoader.load(), 1000, 700);
-            } catch (IOException e) {
-                helpers.pageLoadErrMsg();
-            }
-            stage.setScene(scene);
-            stage.show();
+
         }
-        else{
-            addAppCnSvMesLab.setText(rb.getString("sqlConnErrStmt"));
-        }
+
+
 
 
     }
