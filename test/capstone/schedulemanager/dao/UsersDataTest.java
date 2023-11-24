@@ -16,24 +16,11 @@ import static org.junit.Assert.*;
 
 public class UsersDataTest {
 
-    private Connection connection;
-
-    @Before
-    public void setUp() throws SQLException {
-        // Set up a connection to your test database
-        connection = DriverManager.getConnection("jdbc:mysql://localhost/client_schedule?connectionTimeZone = SERVER", "TestUser", "TestUser81");
-        // Initialize test data in the database
-        getUsrsList();
-    }
-
-    @After
-    public void tearDown() throws SQLException {
-        // Clean up and close the connection
-        connection.close();
-    }
-
     @Test
     public void getUsrsList() throws SQLException {
+
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/client_schedule?connectionTimeZone = SERVER", "TestUser", "TestUser81");
+
 
         ArrayList<capstone.schedulemanager.model.Users> users = new ArrayList<>();
         Conversion cvrtUsrsStmp = stamp -> stamp.toLocalDateTime().atZone(ZoneId.systemDefault()).toLocalDateTime();
@@ -65,9 +52,11 @@ public class UsersDataTest {
 
             }
 
-        String username = "test-invalid";
+        String username = "test";
 
         assertEquals(username, users.get(0).getUserName());
+
+        connection.close();
 
     }
 
