@@ -725,6 +725,7 @@ public class AppointmentsController implements Initializable {
         Optional<ButtonType> choice = helpers.getDelConfirm("deleteConfirm");
 
         if(choice.isPresent() && choice.get() == ButtonType.OK){
+
             check = AppointmentsData.deleteAppointment(aptToDelete.getAppointmentId());
 
 
