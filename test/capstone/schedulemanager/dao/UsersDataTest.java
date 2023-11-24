@@ -3,6 +3,7 @@ package capstone.schedulemanager.dao;
 
 import capstone.schedulemanager.utilities.Conversion;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.*;
@@ -14,13 +15,15 @@ import static org.junit.Assert.*;
 
 public class UsersDataTest {
 
-    @Test
+    ArrayList<capstone.schedulemanager.model.Users> users = new ArrayList<>();
+
+
+    @Before
     public void getUsrsList() throws SQLException {
 
         Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/client_schedule?connectionTimeZone = SERVER", "TestUser", "TestUser81");
 
 
-        ArrayList<capstone.schedulemanager.model.Users> users = new ArrayList<>();
         Conversion cvrtUsrsStmp = stamp -> stamp.toLocalDateTime().atZone(ZoneId.systemDefault()).toLocalDateTime();
 
 
@@ -50,12 +53,24 @@ public class UsersDataTest {
 
             }
 
+        connection.close();
+
+    }
+
+    @Test
+    public void checkEmptyUserList(){
+
+        assertFalse(users.isEmpty());
+    }
+
+    @Test
+    public void checkUserData(){
+
         String username = "test";
 
         assertEquals(username, users.get(0).getUserName());
 
-        connection.close();
-
     }
+
 
 }

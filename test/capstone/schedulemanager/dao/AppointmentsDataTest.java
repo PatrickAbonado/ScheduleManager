@@ -7,6 +7,7 @@ import capstone.schedulemanager.utilities.helpers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.*;
@@ -16,13 +17,12 @@ import static org.junit.Assert.*;
 
 public class AppointmentsDataTest {
 
-    @Test
+    ObservableList<Appointments> appointments = FXCollections.observableArrayList();
+
+    @Before
     public void getAptList() throws SQLException {
 
         Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/client_schedule?connectionTimeZone = SERVER", "TestUser", "TestUser81");
-
-
-        ObservableList<Appointments> appointments = FXCollections.observableArrayList();
 
         Conversion cvrtAptStmp = stamp -> stamp.toLocalDateTime().atZone(ZoneId.systemDefault()).toLocalDateTime();
 
@@ -61,9 +61,20 @@ public class AppointmentsDataTest {
             e.printStackTrace();
             helpers.databsConErrMsg();}
 
-        String testTitle = "repairx";
+    }
 
-        assertEquals(appointments.get(0).getType(), testTitle);
+    @Test
+    public void checkEmptyAptList(){
+
+        assertFalse(appointments.isEmpty());
+    }
+
+    @Test
+    public void checkAptData(){
+
+        String testType = "repairz";
+
+        assertEquals(testType, appointments.get(0).getType());
 
     }
 

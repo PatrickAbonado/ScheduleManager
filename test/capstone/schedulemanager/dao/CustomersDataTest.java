@@ -5,6 +5,7 @@ import capstone.schedulemanager.utilities.Conversion;
 import capstone.schedulemanager.utilities.helpers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.*;
@@ -15,14 +16,17 @@ import static org.junit.Assert.*;
 
 public class CustomersDataTest {
 
-    @Test
+
+    ObservableList<Customers> customers = FXCollections.observableArrayList();
+
+
+    @Before
     public void getCustList() throws SQLException {
 
         Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/client_schedule?connectionTimeZone = SERVER", "TestUser", "TestUser81");
 
         Conversion cvrtCstrStmp = stamp -> stamp.toLocalDateTime().atZone(ZoneId.systemDefault()).toLocalDateTime();
 
-        ObservableList<Customers> customers = FXCollections.observableArrayList();
 
         try{
             String sql = "SELECT * from customers";
@@ -58,11 +62,22 @@ public class CustomersDataTest {
             helpers.databsConErrMsg();
         }
 
-        String customerName = "Michael Knights";
-
-        assertEquals(customerName, customers.get(0).getCustomerName());
-
         connection.close();
+
+    }
+
+    @Test
+    public void checkEmptyCustList(){
+
+        assertFalse(customers.isEmpty());
+    }
+
+    @Test
+    public void checkCustomersData(){
+
+        String testName = "Michael Knight";
+
+        assertEquals(testName, customers.get(0).getCustomerName());
 
     }
 
