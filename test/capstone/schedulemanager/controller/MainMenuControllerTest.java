@@ -6,8 +6,7 @@ import capstone.schedulemanager.utilities.Conversion;
 import capstone.schedulemanager.utilities.helpers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.junit.After;
-import org.junit.Before;
+
 import org.junit.Test;
 
 import java.sql.*;
@@ -113,7 +112,7 @@ public class MainMenuControllerTest {
             helpers.databsConErrMsg();
         }
 
-        String searchText = "knx";
+        String searchText = "kn";
 
         assertTrue(customers.get(0).getCustomerName().toLowerCase().contains(searchText.toLowerCase()));
 

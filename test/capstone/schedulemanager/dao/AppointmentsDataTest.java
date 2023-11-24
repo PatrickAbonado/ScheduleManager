@@ -3,10 +3,10 @@ package capstone.schedulemanager.dao;
 import capstone.schedulemanager.model.Appointments;
 import capstone.schedulemanager.utilities.Conversion;
 import capstone.schedulemanager.utilities.helpers;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.junit.After;
-import org.junit.Before;
+
 import org.junit.Test;
 
 import java.sql.*;

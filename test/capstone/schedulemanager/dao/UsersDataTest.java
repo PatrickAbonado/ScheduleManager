@@ -3,9 +3,7 @@ package capstone.schedulemanager.dao;
 
 import capstone.schedulemanager.utilities.Conversion;
 
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.After;
 
 import java.sql.*;
 import java.time.LocalDateTime;
