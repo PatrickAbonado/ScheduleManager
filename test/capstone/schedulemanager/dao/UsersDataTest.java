@@ -64,22 +64,16 @@ public class UsersDataTest {
     }
 
     @Test
-    public void checkUserNameData(){
+    public void checkUserNameAndPasswordData(){
 
-        String username = "tst";
+        String username = "test";
+        String password = "test";
 
-        assertEquals(username, users.get(0).getUserName());
-
-    }
-
-    @Test
-    public void checkPasswordData(){
-
-        String password = "tet";
-
-        assertEquals(password, users.get(0).getPassword());
+        assertTrue((users.get(0).getUserName().equals(username)
+                && users.get(0).getPassword().equals(password)));
 
     }
+
 
 
 

@@ -61,9 +61,86 @@ public class MainMenuControllerTest {
             e.printStackTrace();
             helpers.databsConErrMsg();}
 
+
+        Conversion cvrtCstrStmp = stamp -> stamp.toLocalDateTime().atZone(ZoneId.systemDefault()).toLocalDateTime();
+
+        ObservableList<capstone.schedulemanager.model.Customers> customers = FXCollections.observableArrayList();
+
+        try{
+            String sql = "SELECT * from customers";
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()){
+                int custId = rs.getInt("Customer_ID");
+                String custName = rs.getString("Customer_Name");
+                String custAdrs = rs.getString("Address");
+                String custPst = rs.getString("Postal_Code");
+                String custPhn = rs.getString("Phone");
+                Timestamp createDateStamp = rs.getTimestamp("Create_Date");
+                String createdBy = rs.getString("Created_By");
+                Timestamp lastUpdateStamp = rs.getTimestamp("Last_Update");
+                String lastUpdatedBy = rs.getString("Last_Updated_By");
+                int divisionId = rs.getInt("Division_ID");
+
+                LocalDateTime createDate = cvrtCstrStmp.getConversion(createDateStamp);
+                LocalDateTime lastUpdate = cvrtCstrStmp.getConversion(lastUpdateStamp);
+
+                capstone.schedulemanager.model.Customers customer = new capstone.schedulemanager.model.Customers(custId, custName, custAdrs,
+                        custPst, custPhn, createDate, createdBy, lastUpdate,
+                        lastUpdatedBy, divisionId);
+
+                customers.add(customer);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            helpers.databsConErrMsg();
+        }
+
+
         String searchText = "rep";
 
-        assertTrue(appointments.get(0).getType().toLowerCase().contains(searchText.toLowerCase()));
+        ObservableList<Appointments> resultList = FXCollections.observableArrayList();
+
+        String customerName = "";
+
+        for(Appointments appointment : appointments){
+
+            for (Customers customer : customers){
+
+                if(customer.getCustomerId() == appointment.getCustomerId()){
+
+                    customerName = customer.getCustomerName();
+                }
+            }
+
+            if(customerName.contains(searchText) ||
+                    appointment.getStartDateAndTime().toString().contains(searchText) ||
+                    appointment.getEndDateAndTime().toString().contains(searchText)){
+                resultList.add(appointment);
+            }
+        }
+
+        boolean isListAccurate = false;
+
+        int counter = resultList.size();
+
+        for (Appointments appointment : resultList){
+
+            if(customerName.contains(searchText) || appointment.getStartDateAndTime().toString().contains(searchText)
+            || appointment.getEndDateAndTime().toString().contains(searchText)){
+                --counter;
+            }
+        }
+
+        if(counter == 0){
+            isListAccurate = true;
+        }
+
+        assertTrue(isListAccurate);
 
         connection.close();
 
@@ -114,7 +191,34 @@ public class MainMenuControllerTest {
 
         String searchText = "kn";
 
-        assertTrue(customers.get(0).getCustomerName().toLowerCase().contains(searchText.toLowerCase()));
+        ObservableList<capstone.schedulemanager.model.Customers> resultList = FXCollections.observableArrayList();
+
+        for (int i = 0; i < customers.size(); ++i) {
+
+            if (customers.get(i).getCustomerName().toLowerCase().contains(searchText)
+                    || customers.get(i).getPhoneNum().contains(searchText)) {
+                resultList.add(customers.get(i));
+
+            }
+        }
+
+        int counter = resultList.size();
+
+        boolean isValidList = false;
+
+        for(Customers customer : resultList){
+
+            if (customer.getCustomerName().toLowerCase().contains(searchText)
+                    || customer.getPhoneNum().contains(searchText)) {
+                --counter;
+            }
+        }
+
+        if(counter == 0){
+            isValidList = true;
+        }
+
+        assertTrue(isValidList);
 
         connection.close();
 
