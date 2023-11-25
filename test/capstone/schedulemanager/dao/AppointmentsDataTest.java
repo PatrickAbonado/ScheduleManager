@@ -21,7 +21,6 @@ import static org.junit.Assert.*;
 public class AppointmentsDataTest {
 
 
-
     Connection connection;
 
     @Before
@@ -36,8 +35,6 @@ public class AppointmentsDataTest {
 
         connection.close();
     }
-
-
 
 
     public void insertAppointment(int custId, String title, String description, String location,
@@ -125,8 +122,6 @@ public class AppointmentsDataTest {
         return appointments;
 
     }
-
-
 
 
     @Test

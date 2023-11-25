@@ -139,7 +139,6 @@ public class CustomersDataTest {
         String custNam = "Peter Pan", address = "88 Banana Street", postal = "54123", phone = "874-521-9871",
                 lastUpdtBy = "admin", createBy = "admin";
 
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime createDate = LocalDateTime.now().withNano(0);
         LocalDateTime lastUpdt = LocalDateTime.now().withNano(0);
         int divId = 15, custId = 2;

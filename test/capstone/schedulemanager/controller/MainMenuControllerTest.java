@@ -124,7 +124,6 @@ public class MainMenuControllerTest {
             }
         }
 
-        boolean isListAccurate = false;
 
         int counter = resultList.size();
 
@@ -136,11 +135,8 @@ public class MainMenuControllerTest {
             }
         }
 
-        if(counter == 0){
-            isListAccurate = true;
-        }
 
-        assertTrue(isListAccurate);
+        assertEquals(0, counter);
 
         connection.close();
 
@@ -204,7 +200,7 @@ public class MainMenuControllerTest {
 
         int counter = resultList.size();
 
-        boolean isValidList = false;
+
 
         for(Customers customer : resultList){
 
@@ -214,11 +210,9 @@ public class MainMenuControllerTest {
             }
         }
 
-        if(counter == 0){
-            isValidList = true;
-        }
 
-        assertTrue(isValidList);
+
+        assertEquals(0, counter);
 
         connection.close();
 
