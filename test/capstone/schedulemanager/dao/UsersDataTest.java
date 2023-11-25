@@ -64,13 +64,23 @@ public class UsersDataTest {
     }
 
     @Test
-    public void checkUserData(){
+    public void checkUserNameData(){
 
-        String username = "test";
+        String username = "tst";
 
         assertEquals(username, users.get(0).getUserName());
 
     }
+
+    @Test
+    public void checkPasswordData(){
+
+        String password = "tet";
+
+        assertEquals(password, users.get(0).getPassword());
+
+    }
+
 
 
 }
