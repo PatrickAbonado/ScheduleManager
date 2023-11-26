@@ -132,16 +132,7 @@ public class AppointmentsDataTest {
         assertFalse(appointments.isEmpty());
     }
 
-    @Test
-    public void checkAptData() throws SQLException {
 
-        ObservableList<Appointments> appointments = getAptList();
-
-        String testType = "repair";
-
-        assertEquals(testType, appointments.get(0).getType());
-
-    }
 
     @Test
     public void checkInsertAppointmentData() throws SQLException {

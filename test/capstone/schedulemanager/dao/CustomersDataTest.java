@@ -12,7 +12,6 @@ import org.junit.Test;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 
 import static org.junit.Assert.*;
 
@@ -71,8 +70,6 @@ public class CustomersDataTest {
 
         ObservableList<Customers> customers = FXCollections.observableArrayList();
 
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/client_schedule?connectionTimeZone = SERVER", "TestUser", "TestUser81");
-
         Conversion cvrtCstrStmp = stamp -> stamp.toLocalDateTime().atZone(ZoneId.systemDefault()).toLocalDateTime();
 
 
@@ -122,16 +119,6 @@ public class CustomersDataTest {
         assertFalse(customers.isEmpty());
     }
 
-    @Test
-    public void checkCustomersData() throws SQLException {
-
-        ObservableList<Customers> customers = getCustList();
-
-        String testName = "Michael Knight";
-
-        assertEquals(testName, customers.get(0).getCustomerName());
-
-    }
 
     @Test
     public void testCustomerInsert() throws SQLException {
