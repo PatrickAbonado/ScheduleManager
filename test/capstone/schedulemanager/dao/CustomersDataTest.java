@@ -17,19 +17,22 @@ import static org.junit.Assert.*;
 
 public class CustomersDataTest {
 
-
     Connection connection;
-
 
     @Before
     public void startConnection() throws SQLException {
 
         connection = DriverManager.getConnection("jdbc:mysql://localhost/client_schedule?connectionTimeZone = SERVER", "TestUser", "TestUser81");
+
+        insertSampleCustomer();
+
     }
 
     @After
     public void closeConnection() throws SQLException{
+
         connection.close();
+
     }
 
     public void insertCust (String custNam, String address, String postal,
@@ -63,15 +66,35 @@ public class CustomersDataTest {
             helpers.databsConErrMsg();
         }
 
+
     }
 
+    public void insertSampleCustomer() throws SQLException {
+
+        String custNam = "Peter Pan", address = "88 Banana Street", postal = "54123", phone = "874-521-9871",
+                lastUpdtBy = "admin", createBy = "admin";
+
+        LocalDateTime createDate = LocalDateTime.now().withNano(0);
+        LocalDateTime lastUpdt = LocalDateTime.now().withNano(0);
+        int divId = 15, custId = 1;
+
+        ObservableList<Customers> customers = getCustList();
+
+        if(customers.isEmpty()){
+
+            insertCust (custNam, address, postal,
+                    phone, createDate, createBy,
+                    lastUpdt, lastUpdtBy, divId, custId);
+
+        }
+
+    }
 
     public ObservableList<Customers> getCustList() throws SQLException {
 
-        ObservableList<Customers> customers = FXCollections.observableArrayList();
-
         Conversion cvrtCstrStmp = stamp -> stamp.toLocalDateTime().atZone(ZoneId.systemDefault()).toLocalDateTime();
 
+        ObservableList<Customers> customers = FXCollections.observableArrayList();
 
         try{
             String sql = "SELECT * from customers";
@@ -111,34 +134,24 @@ public class CustomersDataTest {
 
     }
 
+
     @Test
-    public void checkEmptyCustList() throws SQLException {
+    public void verifyCustomerInserted() throws SQLException {
 
         ObservableList<Customers> customers = getCustList();
 
         assertFalse(customers.isEmpty());
+
     }
 
-
     @Test
-    public void testCustomerInsert() throws SQLException {
+    public void verifyCustomerInsertAccuracy() throws SQLException {
 
-        String custNam = "Peter Pan", address = "88 Banana Street", postal = "54123", phone = "874-521-9871",
-                lastUpdtBy = "admin", createBy = "admin";
-
-        LocalDateTime createDate = LocalDateTime.now().withNano(0);
-        LocalDateTime lastUpdt = LocalDateTime.now().withNano(0);
-        int divId = 15, custId = 2;
-
-        insertCust (custNam, address, postal,
-                phone, createDate, createBy,
-                lastUpdt, lastUpdtBy, divId, custId);
+        String custNam = "Peter Pan";
 
         ObservableList<Customers> customers = getCustList();
 
-        String testName = "Peter Pan";
-
-        assertEquals(testName, customers.get(1).getCustomerName());
+        assertEquals(custNam, customers.get(customers.size()-1).getCustomerName());
 
     }
 

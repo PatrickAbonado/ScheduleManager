@@ -26,7 +26,11 @@ public class AppointmentsDataTest {
     @Before
     public void createConnection() throws SQLException {
 
-        connection = DriverManager.getConnection("jdbc:mysql://localhost/client_schedule?connectionTimeZone = SERVER", "TestUser", "TestUser81");
+        connection = DriverManager.getConnection("jdbc:mysql://localhost/client_schedule?connectionTimeZone = SERVER",
+                "TestUser", "TestUser81");
+
+
+        insertSampleAppointment();
     }
 
 
@@ -75,8 +79,6 @@ public class AppointmentsDataTest {
 
     }
 
-
-
     public ObservableList<Appointments> getAptList() throws SQLException {
 
         ObservableList<Appointments> appointments = FXCollections.observableArrayList();
@@ -123,19 +125,7 @@ public class AppointmentsDataTest {
 
     }
 
-
-    @Test
-    public void checkEmptyAptList() throws SQLException {
-
-        ObservableList<Appointments> appointments = getAptList();
-
-        assertFalse(appointments.isEmpty());
-    }
-
-
-
-    @Test
-    public void checkInsertAppointmentData() throws SQLException {
+    public void insertSampleAppointment() throws SQLException {
 
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         int custId = 1;
@@ -153,15 +143,38 @@ public class AppointmentsDataTest {
         int contactId = 1;
         int appointmentId = 2;
 
-        insertAppointment(custId, title, description, location, type, startDateAndTime, endDateAndTime, creatDt,
-                createdBy, lastUpdt, lastUpdtBy, userId, contactId, appointmentId);
+        ObservableList<Appointments> appointments = getAptList();
 
+        if(appointments.isEmpty()){
+
+            insertAppointment(custId, title, description, location, type, startDateAndTime, endDateAndTime, creatDt,
+                    createdBy, lastUpdt, lastUpdtBy, userId, contactId, appointmentId);
+
+        }
+
+
+
+    }
+
+    @Test
+    public void verifyAppointmentInsert() throws SQLException {
 
         ObservableList<Appointments> appointments = getAptList();
 
-        String testType = "remodel";
+        assertFalse(appointments.isEmpty());
 
-        assertEquals(testType, appointments.get(1).getType());
+
+    }
+
+    @Test
+    public void verifyAppointmentInsertAccuracy() throws SQLException {
+
+        String type = "remodel";
+
+        ObservableList<Appointments> appointments = getAptList();
+
+        assertEquals(type, appointments.get(appointments.size()-1).getType());
+
 
     }
 
