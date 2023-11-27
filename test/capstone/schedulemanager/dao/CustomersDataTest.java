@@ -63,10 +63,7 @@ public class CustomersDataTest {
         }
         catch(SQLException se){
             se.printStackTrace();
-            helpers.databsConErrMsg();
         }
-
-
     }
 
     public void insertSampleCustomer() throws SQLException {
