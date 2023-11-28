@@ -19,6 +19,8 @@ import capstone.schedulemanager.model.*;
 import capstone.schedulemanager.utilities.Element;
 import capstone.schedulemanager.utilities.helpers;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
@@ -472,7 +474,23 @@ public class AppointmentsController implements Initializable {
                     }
                 }
 
-                //map buffered writer buffered reader 1 map each for created and updated
+
+
+                ArrayList<Users> users = UsersData.getUsrsList();
+                String userName = "";
+                for(Users user : users){
+
+                    if(user.getUserId() == userId){
+                        userName = user.getUserName();
+                    }
+
+                }
+
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter("user-productivity.txt",true))) {
+                    bw.write(userId + " " + userName + " " + lastUpdt + " " + rb.getString("userProdReportUpdate") + "\n");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
                 helpers.saveSuccessMessage(rb.getString("apptSvdMessg"));
 
@@ -522,6 +540,22 @@ public class AppointmentsController implements Initializable {
                             }
                         }
                     }
+                }
+
+                ArrayList<Users> users = UsersData.getUsrsList();
+                String userName = "";
+                for(Users user : users){
+
+                    if(user.getUserId() == userId){
+                        userName = user.getUserName();
+                    }
+
+                }
+
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter("user-productivity.txt",true))) {
+                    bw.write(userId + " " + userName + " " + createDate + " " + rb.getString("userProdReportCreated") + "\n");
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
 
                 helpers.saveSuccessMessage(rb.getString("apptSvdMessg"));
