@@ -472,6 +472,8 @@ public class AppointmentsController implements Initializable {
                     }
                 }
 
+                //map buffered writer buffered reader 1 map each for created and updated
+
                 helpers.saveSuccessMessage(rb.getString("apptSvdMessg"));
 
                 FXMLLoader fxmlLoader = new FXMLLoader(Driver.class.getResource("/capstone/schedulemanager/view/Appointments.fxml"));

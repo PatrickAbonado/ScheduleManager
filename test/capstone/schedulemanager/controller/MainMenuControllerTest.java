@@ -20,7 +20,8 @@ public class MainMenuControllerTest {
     @Test
     public void onMainAptsSrchButClick() throws SQLException {
 
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/client_schedule?connectionTimeZone = SERVER", "TestUser", "TestUser81");
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/client_schedule?connectionTimeZone = SERVER",
+                "TestUser", "TestUser81");
 
         ObservableList<Appointments> appointments = FXCollections.observableArrayList();
 
@@ -128,6 +129,14 @@ public class MainMenuControllerTest {
         int counter = resultList.size();
 
         for (Appointments appointment : resultList){
+
+            for (Customers customer : customers){
+
+                if(customer.getCustomerId() == appointment.getCustomerId()){
+
+                    customerName = customer.getCustomerName();
+                }
+            }
 
             if(customerName.contains(searchText) || appointment.getStartDateAndTime().toString().contains(searchText)
             || appointment.getEndDateAndTime().toString().contains(searchText)){

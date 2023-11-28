@@ -77,15 +77,11 @@ public class UsersDataTest {
     @Test
     public void checkValidUserNameAndPasswordDataFalse(){
 
-        String username = "test";
+        String username = "x";
         String password = "test";
 
         assertFalse((users.get(0).getUserName().equals(username)
                 && users.get(0).getPassword().equals(password)));
 
     }
-
-
-
-
 }
