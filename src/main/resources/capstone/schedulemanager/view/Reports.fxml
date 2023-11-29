@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="capstone.schedulemanager.controller.ReportsController">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="capstone.schedulemanager.controller.ReportsController">
   <content>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="900.0" prefWidth="650.0">
          <children>
@@ -50,12 +55,13 @@
                   <TableColumn fx:id="repAptByConCstNmCol" prefWidth="67.2000732421875" text="Name" />
               </columns>
             </TableView>
-            <TableView fx:id="repAptUsrProdTab" layoutX="70.0" layoutY="695.0" prefHeight="138.0" prefWidth="293.0">
+            <TableView fx:id="repAptUsrProdTab" layoutX="70.0" layoutY="695.0" prefHeight="138.0" prefWidth="375.0">
               <columns>
                 <TableColumn fx:id="repAptUsrIdCol" prefWidth="75.0" text="User ID" />
                   <TableColumn fx:id="repAptUsrNmCol" prefWidth="75.0" text="Name" />
                 <TableColumn fx:id="repAptUsrCrtCol" prefWidth="75.0" text="Created" />
                   <TableColumn fx:id="repAptUsrUpdtCol" prefWidth="75.0" text="Updated" />
+                  <TableColumn fx:id="repAptUsrDeleteCol" prefWidth="75.0" text="Deleted" />
               </columns>
             </TableView>
             <Button fx:id="repAptUsrMenuBut" layoutX="565.0" layoutY="807.0" mnemonicParsing="false" onAction="#onRepAptUsrMenuBut" prefHeight="25.0" prefWidth="77.0" text="Main Menu" />

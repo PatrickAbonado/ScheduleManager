@@ -474,24 +474,7 @@ public class AppointmentsController implements Initializable {
                     }
                 }
 
-
-
-                ArrayList<Users> users = UsersData.getUsrsList();
-                String userName = "";
-                for(Users user : users){
-
-                    if(user.getUserId() == userId){
-                        userName = user.getUserName();
-                    }
-
-                }
-
-                try (BufferedWriter bw = new BufferedWriter(new FileWriter("user-productivity.txt",true))) {
-                    bw.write(userId + " " + userName + " " + lastUpdt + " " + rb.getString("userProdReportUpdate") + "\n");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
+                helpers.createUserUpdateReport();
                 helpers.saveSuccessMessage(rb.getString("apptSvdMessg"));
 
                 FXMLLoader fxmlLoader = new FXMLLoader(Driver.class.getResource("/capstone/schedulemanager/view/Appointments.fxml"));
@@ -542,22 +525,7 @@ public class AppointmentsController implements Initializable {
                     }
                 }
 
-                ArrayList<Users> users = UsersData.getUsrsList();
-                String userName = "";
-                for(Users user : users){
-
-                    if(user.getUserId() == userId){
-                        userName = user.getUserName();
-                    }
-
-                }
-
-                try (BufferedWriter bw = new BufferedWriter(new FileWriter("user-productivity.txt",true))) {
-                    bw.write(userId + " " + userName + " " + createDate + " " + rb.getString("userProdReportCreated") + "\n");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
+                helpers.createUserCreateReport();
                 helpers.saveSuccessMessage(rb.getString("apptSvdMessg"));
 
                 FXMLLoader fxmlLoader = new FXMLLoader(Driver.class.getResource("/capstone/schedulemanager/view/Appointments.fxml"));
@@ -767,11 +735,18 @@ public class AppointmentsController implements Initializable {
 
             if(check > 0){
 
+                helpers.createUserDeleteReport();
+
                 helpers.getAptDeleteSucsMesg(aptToDelete);
 
-                if(AppointmentsController.getAptToUpdate().getAppointmentId() == aptToDelete.getAppointmentId()){
-                    setIsAptUpdtOnly(false);
+                if(AppointmentsController.getAptToUpdate() != null){
+
+                    if(AppointmentsController.getAptToUpdate().getAppointmentId() == aptToDelete.getAppointmentId()){
+                        setIsAptUpdtOnly(false);
+                    }
                 }
+
+
 
                 FXMLLoader fxmlLoader = new FXMLLoader(Driver.class.getResource("/capstone/schedulemanager/view/Appointments.fxml"));
                 Stage stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
@@ -826,6 +801,7 @@ public class AppointmentsController implements Initializable {
 
             if(check > 0){
                 helpers.getAptDeleteSucsMesg(appointment);
+                helpers.createUserDeleteReport();
             }
             else{
                 addAppCnSvMesLab.setText(rb.getString("sqlConnErrStmt"));

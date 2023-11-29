@@ -265,6 +265,7 @@ public class MainMenuController implements Initializable {
 
 
             if (check > 0) {
+                helpers.createUserDeleteReport();
                 helpers.getAptDeleteSucsMesg(appointment);
             } else {
                 menuMintAlertLab.setText(rb.getString("sqlConnErrStmt"));
@@ -351,6 +352,7 @@ public class MainMenuController implements Initializable {
         }
 
         if (custCounter > 0) {
+            helpers.createUserDeleteReport();
             helpers.getCustDeleteSucsMesg(selectedCustomer);
         } else {
             menuMintAlertLab.setText(rb.getString("sqlConnErrStmt"));

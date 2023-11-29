@@ -1,18 +1,20 @@
 package capstone.schedulemanager.utilities;
 
+import capstone.schedulemanager.dao.UsersData;
 import capstone.schedulemanager.model.Appointments;
 import capstone.schedulemanager.model.Customers;
+import capstone.schedulemanager.model.Users;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /** This class provides methods to help access, organize, and output data features in the application.*/
 public abstract class helpers {
@@ -360,6 +362,74 @@ public abstract class helpers {
         srchInfoCust.setHeaderText(rb.getString("notFoundTit"));
         srchInfoCust.setContentText(rb.getString("searchInfo"));
         srchInfoCust.showAndWait();
+    }
+
+    public static void createUserDeleteReport(){
+
+        ArrayList<Users> users = UsersData.getUsrsList();
+        String userName = "";
+        int userId = UsersData.getUsrDatUsrId();
+        for(Users user : users){
+
+            if(user.getUserId() == userId){
+                userName = user.getUserName();
+            }
+
+        }
+
+        LocalDateTime deleteDateAndTime = LocalDateTime.now().withNano(0);
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("user-productivity.txt",true))) {
+            bw.write(userId + " " + userName + " " + deleteDateAndTime + " " + rb.getString("userProdReportDeleted") + "\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void createUserCreateReport(){
+
+        ArrayList<Users> users = UsersData.getUsrsList();
+        String userName = "";
+        int userId = UsersData.getUsrDatUsrId();
+        for(Users user : users){
+
+            if(user.getUserId() == userId){
+                userName = user.getUserName();
+            }
+
+        }
+
+        LocalDateTime createDate = LocalDateTime.now().withNano(0);
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("user-productivity.txt",true))) {
+            bw.write(userId + " " + userName + " " + createDate + " " + rb.getString("userProdReportCreated") + "\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public static void createUserUpdateReport(){
+
+        ArrayList<Users> users = UsersData.getUsrsList();
+        String userName = "";
+        int userId = UsersData.getUsrDatUsrId();
+        for(Users user : users){
+            if(user.getUserId() == userId){
+                userName = user.getUserName();
+            }
+        }
+
+        LocalDateTime lastUpdt = LocalDateTime.now().withNano(0);
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("user-productivity.txt",true))) {
+            bw.write(userId + " " + userName + " " + lastUpdt + " " + rb.getString("userProdReportUpdate") + "\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

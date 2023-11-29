@@ -6,13 +6,15 @@ public class ReportUsrProd {
     private String userName;
     private int createdTotal;
     private int updatedTotal;
+    private int deletedTotal;
 
     /** This is the constructor of Reported User Productivity objects.*/
-    public ReportUsrProd(int userId, String userName, int createdTotal, int updatedTotal){
+    public ReportUsrProd(int userId, String userName, int createdTotal, int updatedTotal, int deletedTotal){
         this.userId = userId;
         this.userName = userName;
         this.createdTotal = createdTotal;
         this.updatedTotal = updatedTotal;
+        this.deletedTotal = deletedTotal;
     }
 
     /**
@@ -69,5 +71,13 @@ public class ReportUsrProd {
      */
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public int getDeletedTotal() {
+        return deletedTotal;
+    }
+
+    public void setDeletedTotal(int deletedTotal) {
+        this.deletedTotal = deletedTotal;
     }
 }

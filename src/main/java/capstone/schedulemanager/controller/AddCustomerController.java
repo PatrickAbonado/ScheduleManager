@@ -15,6 +15,8 @@ import capstone.schedulemanager.dao.*;
 import capstone.schedulemanager.model.*;
 import capstone.schedulemanager.utilities.helpers;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -155,6 +157,7 @@ public class AddCustomerController implements Initializable  {
 
 
         if (check > 0){
+            helpers.createUserCreateReport();
             helpers.saveSuccessMessage(rb.getString("custSvdMessg"));
         }
 
@@ -283,6 +286,7 @@ public class AddCustomerController implements Initializable  {
         }
 
         if(custCounter > 0){
+            helpers.createUserDeleteReport();
             helpers.getCustDeleteSucsMesg(selectedCustomer);
         }
         else{

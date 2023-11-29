@@ -22,7 +22,7 @@ import capstone.schedulemanager.model.*;
 import capstone.schedulemanager.utilities.Element;
 import capstone.schedulemanager.utilities.helpers;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -57,6 +57,7 @@ public class ReportsController implements Initializable {
     public TableColumn repAptUsrUpdtCol;
     public TableColumn repAptByConCustIdCol;
     public Button repAptUsrMenuBut;
+    public TableColumn repAptUsrDeleteCol;
     ObservableList<capstone.schedulemanager.model.Appointments> appointments = AppointmentsData.getAptList();
 
     /** Declaration of a Lambda expression used to extract the month number from a date as a String type.
@@ -99,6 +100,7 @@ public class ReportsController implements Initializable {
         repAptUsrNmCol.setCellValueFactory(new PropertyValueFactory<>("userName"));
         repAptUsrCrtCol.setCellValueFactory(new PropertyValueFactory<>("createdTotal"));
         repAptUsrUpdtCol.setCellValueFactory(new PropertyValueFactory<>("updatedTotal"));
+        repAptUsrDeleteCol.setCellValueFactory(new PropertyValueFactory<>("deletedTotal"));
 
     }
 
@@ -225,7 +227,116 @@ public class ReportsController implements Initializable {
      *  @param list Observable list*/
     public void makeUsrProductivityList(ObservableList<capstone.schedulemanager.model.ReportUsrProd> list){
 
-        ObservableList<capstone.schedulemanager.model.Customers> customers = CustomersData.getCustList();
+
+        Map<Integer, Integer> createdMapTotal = new HashMap<>();
+        Map<Integer, Integer> updatedMapTotal = new HashMap<>();
+        Map<Integer, Integer> deletedMapTotal = new HashMap<>();
+        try (BufferedReader br = new BufferedReader(new FileReader("user-productivity.txt"))) {
+
+            String prodLine = "";
+            int createdInit = 0;
+            while((prodLine = br.readLine()) != null){
+
+                String[] userProdValue = prodLine.split(" ");
+
+                if(userProdValue[3].equals("CREATED")){
+
+                    if(!createdMapTotal.containsKey(Integer.parseInt(userProdValue[0]))){
+
+                        createdMapTotal.put(Integer.parseInt(userProdValue[0]), createdInit+1);
+                    }
+                    else{
+                        createdMapTotal.put(Integer.parseInt(userProdValue[0]), createdMapTotal.get(Integer.parseInt(userProdValue[0]))+1);
+                    }
+
+                }
+
+                int updateInit = 0;
+                if(userProdValue[3].equals("UPDATED")){
+
+                    if(!updatedMapTotal.containsKey(Integer.parseInt(userProdValue[0]))){
+
+                        updatedMapTotal.put(Integer.parseInt(userProdValue[0]), updateInit + 1);
+
+                    }
+                    else
+                        updatedMapTotal.put(Integer.parseInt(userProdValue[0]), updatedMapTotal.get(Integer.parseInt(userProdValue[0])) + 1);
+
+                }
+
+                int deleteinit = 0;
+                if(userProdValue[3].equals("DELETED")){
+
+                    if(!deletedMapTotal.containsKey(Integer.parseInt(userProdValue[0]))){
+
+                        deletedMapTotal.put(Integer.parseInt(userProdValue[0]), deleteinit + 1);
+
+                    }
+                    else
+                        deletedMapTotal.put(Integer.parseInt(userProdValue[0]), deletedMapTotal.get(Integer.parseInt(userProdValue[0])) + 1);
+
+                }
+
+            }
+
+            /*for (Map.Entry<Integer, Integer> createdEntry : createdMapTotal.entrySet()){
+
+                System.out.println("Created : " + createdEntry.getKey() + " : " + createdEntry.getValue());
+            }
+
+            for (Map.Entry<Integer, Integer> updatedEntry : updatedMapTotal.entrySet()){
+
+                System.out.println("Updated : " + updatedEntry.getKey() + " : " + updatedEntry.getValue());
+            }*/
+
+
+            ArrayList<Users> users = UsersData.getUsrsList();
+            for (Users user : users){
+
+                int createdTotal=0, updatedTotal=0, deletedTotal=0;
+
+                if(createdMapTotal.containsKey(user.getUserId())){
+
+                    for (Map.Entry<Integer, Integer> createdEntry : createdMapTotal.entrySet()){
+
+                        if(user.getUserId() == createdEntry.getKey()){
+                            createdTotal = createdEntry.getValue();
+                        }
+                    }
+                }
+
+                if(updatedMapTotal.containsKey(user.getUserId())){
+
+                    for (Map.Entry<Integer, Integer> updatedEntry : updatedMapTotal.entrySet()){
+
+                        if(user.getUserId() == updatedEntry.getKey()){
+                            updatedTotal = updatedEntry.getValue();
+                        }
+                    }
+                }
+
+                if(deletedMapTotal.containsKey(user.getUserId())){
+
+                    for (Map.Entry<Integer,Integer> deletedEntry : deletedMapTotal.entrySet()){
+
+                        if(user.getUserId() == deletedEntry.getKey()){
+
+                            deletedTotal = deletedEntry.getValue();
+                        }
+                    }
+                }
+
+                list.add(new ReportUsrProd(user.getUserId(), user.getUserName(),
+                        createdTotal, updatedTotal,deletedTotal));
+            }
+
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        /*
+         ObservableList<capstone.schedulemanager.model.Customers> customers = CustomersData.getCustList();
 
         for(capstone.schedulemanager.model.Users user : UsersData.getUsrsList()){
             int userId = user.getUserId();
@@ -252,7 +363,9 @@ public class ReportsController implements Initializable {
             }
 
             list.add(new ReportUsrProd(userId, userName, created, updated));
-        }
+        }*/
+
+
     }
 
     /** This method closes the Reports page and loads the Menu page. After the user clicks the menu button, the Reports

@@ -15,11 +15,14 @@ import capstone.schedulemanager.dao.*;
 import capstone.schedulemanager.model.*;
 import capstone.schedulemanager.utilities.helpers;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -259,7 +262,8 @@ public class UpdateCustomerController implements Initializable {
             updateCustMsgLab.setText(rb.getString("sqlConnErrStmt"));
         }
         else{
-           helpers.saveSuccessMessage(rb.getString("custSvdMessg"));
+            helpers.createUserUpdateReport();
+            helpers.saveSuccessMessage(rb.getString("custSvdMessg"));
         }
 
         updtCustTitLab.setText(name);
@@ -335,6 +339,7 @@ public class UpdateCustomerController implements Initializable {
 
 
             if(check > 0){
+                helpers.createUserDeleteReport();
                 helpers.getAptDeleteSucsMesg(appointment);
             }
             else{
