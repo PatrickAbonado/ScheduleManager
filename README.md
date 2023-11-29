@@ -39,7 +39,7 @@ Clicking the cancel button on all form pages will send you back to to the main m
 
 --To exit the program you can either click the X on the top right corner of any page or you can click the Exit button on the Main Menu.
 
---The Main Menu has two tables. The top table has all appointments for all customers currently in the system while the bottom table shows all customers currently in the system. 
+--The Main Menu has two tables. The top table has all appointments for all customers currently in the system while the bottom table shows all customers currently in the system. To use the search functionality above both tables, enter text and click the Search button. The appointments table will filter the list displayed on the table to all appointments whose customer name, start date, or end date contains the input search text.  The customers table will filter the list displayed on the table to only include those customers whose customer name or phone number contains the input search text. 
 After selecting a customer or appointment the service button's of update or delete can be applied to the selected object. 
 Clicking the Add button underneath the appointments table will cause the Main Menu page to close and the Appointments page to load. 
 After clicking the Add button underneath the Customers table, the Main Menu page is closed and the Add Customer page is loaded. 
