@@ -228,143 +228,95 @@ public class ReportsController implements Initializable {
     public void makeUsrProductivityList(ObservableList<capstone.schedulemanager.model.ReportUsrProd> list){
 
 
+        File file = new File("user-productivity.txt");
+
         Map<Integer, Integer> createdMapTotal = new HashMap<>();
         Map<Integer, Integer> updatedMapTotal = new HashMap<>();
         Map<Integer, Integer> deletedMapTotal = new HashMap<>();
-        try (BufferedReader br = new BufferedReader(new FileReader("user-productivity.txt"))) {
 
-            String prodLine = "";
-            int createdInit = 0;
-            while((prodLine = br.readLine()) != null){
 
-                String[] userProdValue = prodLine.split(" ");
+        if(file.exists()){
 
-                if(userProdValue[3].equals("CREATED")){
+            try (BufferedReader br = new BufferedReader(new FileReader("user-productivity.txt"))) {
 
-                    if(!createdMapTotal.containsKey(Integer.parseInt(userProdValue[0]))){
+                String prodLine = "";
+                int createdInit = 0;
+                while((prodLine = br.readLine()) != null){
 
-                        createdMapTotal.put(Integer.parseInt(userProdValue[0]), createdInit+1);
+                    String[] userProdValue = prodLine.split(" ");
+
+                    if(userProdValue[3].equals("CREATED")){
+
+                        createdMapTotal.put(Integer.parseInt(userProdValue[0]),
+                                createdMapTotal.getOrDefault(Integer.parseInt(userProdValue[0]), createdInit) + 1);
+
                     }
-                    else{
-                        createdMapTotal.put(Integer.parseInt(userProdValue[0]), createdMapTotal.get(Integer.parseInt(userProdValue[0]))+1);
+
+                    int updateInit = 0;
+                    if(userProdValue[3].equals("UPDATED")){
+
+                        updatedMapTotal.put(Integer.parseInt(userProdValue[0]),
+                                updatedMapTotal.getOrDefault(Integer.parseInt(userProdValue[0]), updateInit) + 1);
+
+                    }
+
+                    int deleteinit = 0;
+                    if(userProdValue[3].equals("DELETED")){
+
+                        deletedMapTotal.put(Integer.parseInt(userProdValue[0]),
+                                deletedMapTotal.getOrDefault(Integer.parseInt(userProdValue[0]), deleteinit) + 1);
+
                     }
 
                 }
 
-                int updateInit = 0;
-                if(userProdValue[3].equals("UPDATED")){
 
-                    if(!updatedMapTotal.containsKey(Integer.parseInt(userProdValue[0]))){
+                ArrayList<Users> users = UsersData.getUsrsList();
+                for (Users user : users){
 
-                        updatedMapTotal.put(Integer.parseInt(userProdValue[0]), updateInit + 1);
+                    int createdTotal=0, updatedTotal=0, deletedTotal=0;
 
+                    if(createdMapTotal.containsKey(user.getUserId())){
+
+                        for (Map.Entry<Integer, Integer> createdEntry : createdMapTotal.entrySet()){
+
+                            if(user.getUserId() == createdEntry.getKey()){
+                                createdTotal = createdEntry.getValue();
+                            }
+                        }
                     }
-                    else
-                        updatedMapTotal.put(Integer.parseInt(userProdValue[0]), updatedMapTotal.get(Integer.parseInt(userProdValue[0])) + 1);
 
-                }
+                    if(updatedMapTotal.containsKey(user.getUserId())){
 
-                int deleteinit = 0;
-                if(userProdValue[3].equals("DELETED")){
+                        for (Map.Entry<Integer, Integer> updatedEntry : updatedMapTotal.entrySet()){
 
-                    if(!deletedMapTotal.containsKey(Integer.parseInt(userProdValue[0]))){
-
-                        deletedMapTotal.put(Integer.parseInt(userProdValue[0]), deleteinit + 1);
-
+                            if(user.getUserId() == updatedEntry.getKey()){
+                                updatedTotal = updatedEntry.getValue();
+                            }
+                        }
                     }
-                    else
-                        deletedMapTotal.put(Integer.parseInt(userProdValue[0]), deletedMapTotal.get(Integer.parseInt(userProdValue[0])) + 1);
 
+                    if(deletedMapTotal.containsKey(user.getUserId())){
+
+                        for (Map.Entry<Integer,Integer> deletedEntry : deletedMapTotal.entrySet()){
+
+                            if(user.getUserId() == deletedEntry.getKey()){
+
+                                deletedTotal = deletedEntry.getValue();
+                            }
+                        }
+                    }
+
+                    list.add(new ReportUsrProd(user.getUserId(), user.getUserName(),
+                            createdTotal, updatedTotal,deletedTotal));
                 }
 
             }
-
-            /*for (Map.Entry<Integer, Integer> createdEntry : createdMapTotal.entrySet()){
-
-                System.out.println("Created : " + createdEntry.getKey() + " : " + createdEntry.getValue());
-            }
-
-            for (Map.Entry<Integer, Integer> updatedEntry : updatedMapTotal.entrySet()){
-
-                System.out.println("Updated : " + updatedEntry.getKey() + " : " + updatedEntry.getValue());
-            }*/
-
-
-            ArrayList<Users> users = UsersData.getUsrsList();
-            for (Users user : users){
-
-                int createdTotal=0, updatedTotal=0, deletedTotal=0;
-
-                if(createdMapTotal.containsKey(user.getUserId())){
-
-                    for (Map.Entry<Integer, Integer> createdEntry : createdMapTotal.entrySet()){
-
-                        if(user.getUserId() == createdEntry.getKey()){
-                            createdTotal = createdEntry.getValue();
-                        }
-                    }
-                }
-
-                if(updatedMapTotal.containsKey(user.getUserId())){
-
-                    for (Map.Entry<Integer, Integer> updatedEntry : updatedMapTotal.entrySet()){
-
-                        if(user.getUserId() == updatedEntry.getKey()){
-                            updatedTotal = updatedEntry.getValue();
-                        }
-                    }
-                }
-
-                if(deletedMapTotal.containsKey(user.getUserId())){
-
-                    for (Map.Entry<Integer,Integer> deletedEntry : deletedMapTotal.entrySet()){
-
-                        if(user.getUserId() == deletedEntry.getKey()){
-
-                            deletedTotal = deletedEntry.getValue();
-                        }
-                    }
-                }
-
-                list.add(new ReportUsrProd(user.getUserId(), user.getUserName(),
-                        createdTotal, updatedTotal,deletedTotal));
+            catch (IOException e) {
+                e.printStackTrace();
             }
 
         }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        /*
-         ObservableList<capstone.schedulemanager.model.Customers> customers = CustomersData.getCustList();
-
-        for(capstone.schedulemanager.model.Users user : UsersData.getUsrsList()){
-            int userId = user.getUserId();
-            String userName = user.getUserName();
-            int created = 0;
-            int updated = 0;
-
-            for(int i = 0; i < appointments.size(); ++i){
-                if(appointments.get(i).getCreatedBy().equals(userName)){
-                    ++created;
-                }
-                if(appointments.get(i).getLastUpdateBy().equals(userName)){
-                    ++updated;
-                }
-            }
-
-            for(int i = 0; i < customers.size(); ++i){
-                if(customers.get(i).getCreatedBy().equals(userName)){
-                    ++created;
-                }
-                if(customers.get(i).getLastUpdatedBy().equals(userName)){
-                    ++updated;
-                }
-            }
-
-            list.add(new ReportUsrProd(userId, userName, created, updated));
-        }*/
-
 
     }
 
