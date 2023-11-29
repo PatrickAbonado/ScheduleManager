@@ -397,9 +397,7 @@ public abstract class helpers {
             if(user.getUserId() == userId){
                 userName = user.getUserName();
             }
-
         }
-
         LocalDateTime createDate = LocalDateTime.now().withNano(0);
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("user-productivity.txt",true))) {
@@ -407,8 +405,6 @@ public abstract class helpers {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
     public static void createUserUpdateReport(){
