@@ -19,9 +19,6 @@ public class UserProductivityData {
 
     static ResourceBundle rb = ResourceBundle.getBundle("Languages", Locale.getDefault());
 
-
-
-
     public static int insertUserTrackData(int userId, String userName, String userReportTime, String userReportType){
         int rowsAffected = 0;
 
