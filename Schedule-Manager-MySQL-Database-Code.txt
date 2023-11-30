@@ -12,6 +12,16 @@ EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 SET FOREIGN_KEY_CHECKS = 1;
 
+
+--
+-- Table structure for table `user_tracker`
+--
+
+DROP TABLE IF EXISTS `user_tracker`;
+
+CREATE TABLE `user_tracker` (`user_id` int, `user_name` varchar(80),
+`user_time` varchar(80), `user_report_type` varchar(40)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 --
 -- Table structure for table `users`
 --
