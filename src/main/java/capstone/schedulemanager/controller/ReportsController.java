@@ -1,5 +1,6 @@
 package capstone.schedulemanager.controller;
 
+import capstone.schedulemanager.dao.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,10 +15,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import capstone.schedulemanager.Driver;
-import capstone.schedulemanager.dao.AppointmentsData;
-import capstone.schedulemanager.dao.ContactsData;
-import capstone.schedulemanager.dao.CustomersData;
-import capstone.schedulemanager.dao.UsersData;
 import capstone.schedulemanager.model.*;
 import capstone.schedulemanager.utilities.Element;
 import capstone.schedulemanager.utilities.helpers;
@@ -227,96 +224,53 @@ public class ReportsController implements Initializable {
      *  @param list Observable list*/
     public void makeUsrProductivityList(ObservableList<capstone.schedulemanager.model.ReportUsrProd> list){
 
-
-        File file = new File("user-productivity.txt");
-
         Map<Integer, Integer> createdMapTotal = new HashMap<>();
         Map<Integer, Integer> updatedMapTotal = new HashMap<>();
         Map<Integer, Integer> deletedMapTotal = new HashMap<>();
 
+        UserProductivityData.updateUserProductivityCounts(createdMapTotal,updatedMapTotal,deletedMapTotal);
 
-        if(file.exists()){
 
-            try (BufferedReader br = new BufferedReader(new FileReader("user-productivity.txt"))) {
+        ArrayList<Users> users = UsersData.getUsrsList();
+        for (Users user : users){
 
-                String prodLine = "";
-                int createdInit = 0;
-                while((prodLine = br.readLine()) != null){
+            int createdTotal=0, updatedTotal=0, deletedTotal=0;
 
-                    String[] userProdValue = prodLine.split(" ");
+            if(createdMapTotal.containsKey(user.getUserId())){
 
-                    if(userProdValue[3].equals("CREATED")){
+                for (Map.Entry<Integer, Integer> createdEntry : createdMapTotal.entrySet()){
 
-                        createdMapTotal.put(Integer.parseInt(userProdValue[0]),
-                                createdMapTotal.getOrDefault(Integer.parseInt(userProdValue[0]), createdInit) + 1);
-
+                    if(user.getUserId() == createdEntry.getKey()){
+                        createdTotal = createdEntry.getValue();
                     }
-
-                    int updateInit = 0;
-                    if(userProdValue[3].equals("UPDATED")){
-
-                        updatedMapTotal.put(Integer.parseInt(userProdValue[0]),
-                                updatedMapTotal.getOrDefault(Integer.parseInt(userProdValue[0]), updateInit) + 1);
-
-                    }
-
-                    int deleteinit = 0;
-                    if(userProdValue[3].equals("DELETED")){
-
-                        deletedMapTotal.put(Integer.parseInt(userProdValue[0]),
-                                deletedMapTotal.getOrDefault(Integer.parseInt(userProdValue[0]), deleteinit) + 1);
-
-                    }
-
                 }
-
-
-                ArrayList<Users> users = UsersData.getUsrsList();
-                for (Users user : users){
-
-                    int createdTotal=0, updatedTotal=0, deletedTotal=0;
-
-                    if(createdMapTotal.containsKey(user.getUserId())){
-
-                        for (Map.Entry<Integer, Integer> createdEntry : createdMapTotal.entrySet()){
-
-                            if(user.getUserId() == createdEntry.getKey()){
-                                createdTotal = createdEntry.getValue();
-                            }
-                        }
-                    }
-
-                    if(updatedMapTotal.containsKey(user.getUserId())){
-
-                        for (Map.Entry<Integer, Integer> updatedEntry : updatedMapTotal.entrySet()){
-
-                            if(user.getUserId() == updatedEntry.getKey()){
-                                updatedTotal = updatedEntry.getValue();
-                            }
-                        }
-                    }
-
-                    if(deletedMapTotal.containsKey(user.getUserId())){
-
-                        for (Map.Entry<Integer,Integer> deletedEntry : deletedMapTotal.entrySet()){
-
-                            if(user.getUserId() == deletedEntry.getKey()){
-
-                                deletedTotal = deletedEntry.getValue();
-                            }
-                        }
-                    }
-
-                    list.add(new ReportUsrProd(user.getUserId(), user.getUserName(),
-                            createdTotal, updatedTotal,deletedTotal));
-                }
-
-            }
-            catch (IOException e) {
-                e.printStackTrace();
             }
 
+            if(updatedMapTotal.containsKey(user.getUserId())){
+
+                for (Map.Entry<Integer, Integer> updatedEntry : updatedMapTotal.entrySet()){
+
+                    if(user.getUserId() == updatedEntry.getKey()){
+                        updatedTotal = updatedEntry.getValue();
+                    }
+                }
+            }
+
+            if(deletedMapTotal.containsKey(user.getUserId())){
+
+                for (Map.Entry<Integer,Integer> deletedEntry : deletedMapTotal.entrySet()){
+
+                    if(user.getUserId() == deletedEntry.getKey()){
+
+                        deletedTotal = deletedEntry.getValue();
+                    }
+                }
+            }
+
+            list.add(new ReportUsrProd(user.getUserId(), user.getUserName(),
+                    createdTotal, updatedTotal,deletedTotal));
         }
+
 
     }
 

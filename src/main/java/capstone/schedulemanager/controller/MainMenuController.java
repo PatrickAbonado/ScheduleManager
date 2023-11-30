@@ -337,6 +337,7 @@ public class MainMenuController implements Initializable {
                         aptCheckCntr = AppointmentsData.deleteAppointment(delAptList.get(i).getAppointmentId());
                     }
                     if (aptCheckCntr > 0) {
+                        helpers.createUserDeleteReport();
                         helpers.getAptDeleteSucsMesg(aptToDel);
                     }
                 }

@@ -270,6 +270,7 @@ public class AddCustomerController implements Initializable  {
                         aptCheckCntr = AppointmentsData.deleteAppointment(aptList.get(i).getAppointmentId());
                     }
                     if (aptCheckCntr > 0){
+                        helpers.createUserDeleteReport();
                         helpers.getAptDeleteSucsMesg(aptToDel);
                     }
                 }

@@ -1,5 +1,6 @@
 package capstone.schedulemanager.utilities;
 
+import capstone.schedulemanager.dao.UserProductivityData;
 import capstone.schedulemanager.dao.UsersData;
 import capstone.schedulemanager.model.Appointments;
 import capstone.schedulemanager.model.Customers;
@@ -378,6 +379,10 @@ public abstract class helpers {
         }
 
         LocalDateTime deleteDateAndTime = LocalDateTime.now().withNano(0);
+        String dateAndTimeDeleted = deleteDateAndTime.toString();
+
+        UserProductivityData.insertUserTrackData(userId,userName,dateAndTimeDeleted,
+                rb.getString("userProdReportDeleted"));
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("user-productivity.txt",true))) {
             bw.write(userId + " " + userName + " " + deleteDateAndTime + " " + rb.getString("userProdReportDeleted") + "\n");
@@ -399,6 +404,10 @@ public abstract class helpers {
             }
         }
         LocalDateTime createDate = LocalDateTime.now().withNano(0);
+        String dateAndTimeCreated = createDate.toString();
+
+        UserProductivityData.insertUserTrackData(userId,userName,dateAndTimeCreated,
+                rb.getString("userProdReportCreated"));
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("user-productivity.txt",true))) {
             bw.write(userId + " " + userName + " " + createDate + " " + rb.getString("userProdReportCreated") + "\n");
@@ -419,6 +428,10 @@ public abstract class helpers {
         }
 
         LocalDateTime lastUpdt = LocalDateTime.now().withNano(0);
+        String lastUpdtString = lastUpdt.toString();
+
+        UserProductivityData.insertUserTrackData(userId,userName,lastUpdtString,
+                rb.getString("userProdReportUpdate"));
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("user-productivity.txt",true))) {
             bw.write(userId + " " + userName + " " + lastUpdt + " " + rb.getString("userProdReportUpdate") + "\n");
