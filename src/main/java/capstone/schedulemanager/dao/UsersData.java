@@ -244,4 +244,20 @@ public abstract class UsersData {
 
     }
 
+    public static String getUsername(int userId){
+
+        String userName = "";
+        int validUserId = getUsrDatUsrId();
+        ArrayList<capstone.schedulemanager.model.Users> users = getUsrsList();
+
+        for (Users user : users){
+            if(user.getUserId() == validUserId){
+                userName = user.getUserName();
+            }
+        }
+
+        return userName;
+
+    }
+
 }

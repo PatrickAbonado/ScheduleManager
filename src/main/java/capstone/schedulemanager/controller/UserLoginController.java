@@ -77,11 +77,16 @@ public class UserLoginController implements Initializable {
 
         String username = loginUsernameText.getText();
         String password = loginPasswordText.getText();
+        String userNameToCheck = "";
 
         ArrayList<capstone.schedulemanager.model.Users>users = UsersData.getUsrsList();
 
         for(capstone.schedulemanager.model.Users user : users){
-            if(user.getUserName().equals(username) && user.getPassword().equals(password)){
+
+            userNameToCheck = user.getUserName();
+            String passwordToCheck = user.getPassword();
+
+            if(userNameToCheck.equals(username) && passwordToCheck.equals(password)){
 
                 UsersData.setUsrDatUsrId(user.getUserId());
 
@@ -108,13 +113,15 @@ public class UserLoginController implements Initializable {
         String logonData = "";
         String fileName = "login_activity.txt";
         int userId = UsersData.getUsrDatUsrId();
+        String userName = UsersData.getUsername(userId);
         LocalDateTime currentDateTime = LocalDateTime.now().withNano(0);
 
         if(logonValid){
-            logonData = "\n" +rb.getString("loginTxtFlVldPt1") + userId + rb.getString("loginTxtFlVldPt2") + currentDateTime;
+            logonData = rb.getString("loginTxtFlVldPt1") + userId + rb.getString("loginTxtFlVldPt3") +
+                    userName + rb.getString("loginTxtFlVldPt2")  + currentDateTime + "\n";
         }
         else{
-            logonData = "\n" + rb.getString("loginTxtFlInvld") + currentDateTime;
+            logonData = rb.getString("loginTxtFlInvld") + currentDateTime + "\n";
         }
 
         try (FileWriter writer = new FileWriter(fileName, true)) {
