@@ -1,5 +1,6 @@
 package capstone.schedulemanager.controller;
 
+import capstone.schedulemanager.dao.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,10 +12,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import capstone.schedulemanager.Driver;
-import capstone.schedulemanager.dao.AppointmentsData;
-import capstone.schedulemanager.dao.ContactsData;
-import capstone.schedulemanager.dao.CustomersData;
-import capstone.schedulemanager.dao.UsersData;
 import capstone.schedulemanager.model.*;
 import capstone.schedulemanager.utilities.Element;
 import capstone.schedulemanager.utilities.helpers;
@@ -474,7 +471,7 @@ public class AppointmentsController implements Initializable {
                     }
                 }
 
-                helpers.createUserUpdateReport();
+                UserProductivityData.createUserUpdateReport();
                 helpers.saveSuccessMessage(rb.getString("apptSvdMessg"));
 
                 FXMLLoader fxmlLoader = new FXMLLoader(Driver.class.getResource("/capstone/schedulemanager/view/Appointments.fxml"));
@@ -525,7 +522,7 @@ public class AppointmentsController implements Initializable {
                     }
                 }
 
-                helpers.createUserCreateReport();
+                UserProductivityData.createUserCreateReport();
                 helpers.saveSuccessMessage(rb.getString("apptSvdMessg"));
 
                 FXMLLoader fxmlLoader = new FXMLLoader(Driver.class.getResource("/capstone/schedulemanager/view/Appointments.fxml"));
@@ -735,7 +732,7 @@ public class AppointmentsController implements Initializable {
 
             if(check > 0){
 
-                helpers.createUserDeleteReport();
+                UserProductivityData.createUserDeleteReport();
 
                 helpers.getAptDeleteSucsMesg(aptToDelete);
 
@@ -801,7 +798,7 @@ public class AppointmentsController implements Initializable {
 
             if(check > 0){
                 helpers.getAptDeleteSucsMesg(appointment);
-                helpers.createUserDeleteReport();
+                UserProductivityData.createUserDeleteReport();
             }
             else{
                 addAppCnSvMesLab.setText(rb.getString("sqlConnErrStmt"));

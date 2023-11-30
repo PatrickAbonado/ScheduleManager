@@ -1,13 +1,26 @@
 package capstone.schedulemanager.dao;
 
+import capstone.schedulemanager.model.Users;
 import capstone.schedulemanager.utilities.helpers;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 public class UserProductivityData {
+
+    static ResourceBundle rb = ResourceBundle.getBundle("Languages", Locale.getDefault());
+
+
+
 
     public static int insertUserTrackData(int userId, String userName, String userReportTime, String userReportType){
         int rowsAffected = 0;
@@ -85,4 +98,82 @@ public class UserProductivityData {
 
         }
 
+    public static void createUserDeleteReport(){
+
+
+        ArrayList<Users> users = UsersData.getUsrsList();
+        String userName = "";
+        int userId = UsersData.getUsrDatUsrId();
+        for(Users user : users){
+
+            if(user.getUserId() == userId){
+                userName = user.getUserName();
+            }
+
+        }
+
+        LocalDateTime deleteDateAndTime = LocalDateTime.now().withNano(0);
+        String dateAndTimeDeleted = deleteDateAndTime.toString();
+
+       insertUserTrackData(userId,userName,dateAndTimeDeleted,
+                rb.getString("userProdReportDeleted"));
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("user-productivity.txt",true))) {
+            bw.write(userId + " " + userName + " " + deleteDateAndTime + " " + rb.getString("userProdReportDeleted") + "\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
+
+    public static void createUserCreateReport(){
+
+
+        ArrayList<Users> users = UsersData.getUsrsList();
+        String userName = "";
+        int userId = UsersData.getUsrDatUsrId();
+        for(Users user : users){
+
+            if(user.getUserId() == userId){
+                userName = user.getUserName();
+            }
+        }
+        LocalDateTime createDate = LocalDateTime.now().withNano(0);
+        String dateAndTimeCreated = createDate.toString();
+
+        insertUserTrackData(userId,userName,dateAndTimeCreated,
+                rb.getString("userProdReportCreated"));
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("user-productivity.txt",true))) {
+            bw.write(userId + " " + userName + " " + createDate + " " + rb.getString("userProdReportCreated") + "\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void createUserUpdateReport(){
+
+        ArrayList<Users> users = UsersData.getUsrsList();
+        String userName = "";
+        int userId = UsersData.getUsrDatUsrId();
+        for(Users user : users){
+            if(user.getUserId() == userId){
+                userName = user.getUserName();
+            }
+        }
+
+        LocalDateTime lastUpdt = LocalDateTime.now().withNano(0);
+        String lastUpdtString = lastUpdt.toString();
+
+        insertUserTrackData(userId,userName,lastUpdtString,
+                rb.getString("userProdReportUpdate"));
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("user-productivity.txt",true))) {
+            bw.write(userId + " " + userName + " " + lastUpdt + " " + rb.getString("userProdReportUpdate") + "\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+}
