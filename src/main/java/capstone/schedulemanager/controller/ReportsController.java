@@ -228,7 +228,7 @@ public class ReportsController implements Initializable {
         Map<Integer, Integer> updatedMapTotal = new HashMap<>();
         Map<Integer, Integer> deletedMapTotal = new HashMap<>();
 
-        UserProductivityData.updateUserProductivityCounts(createdMapTotal,updatedMapTotal,deletedMapTotal);
+        UsersData.updateUserProductivityCounts(createdMapTotal,updatedMapTotal,deletedMapTotal);
 
 
         ArrayList<Users> users = UsersData.getUsrsList();

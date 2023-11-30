@@ -1,6 +1,6 @@
 package capstone.schedulemanager.controller;
 
-import capstone.schedulemanager.dao.UserProductivityData;
+import capstone.schedulemanager.dao.UsersData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -266,7 +266,7 @@ public class MainMenuController implements Initializable {
 
 
             if (check > 0) {
-                UserProductivityData.createUserDeleteReport();
+                UsersData.createUserDeleteReport();
                 helpers.getAptDeleteSucsMesg(appointment);
             } else {
                 menuMintAlertLab.setText(rb.getString("sqlConnErrStmt"));
@@ -338,7 +338,7 @@ public class MainMenuController implements Initializable {
                         aptCheckCntr = AppointmentsData.deleteAppointment(delAptList.get(i).getAppointmentId());
                     }
                     if (aptCheckCntr > 0) {
-                        UserProductivityData.createUserDeleteReport();
+                        UsersData.createUserDeleteReport();
                         helpers.getAptDeleteSucsMesg(aptToDel);
                     }
                 }
@@ -354,7 +354,7 @@ public class MainMenuController implements Initializable {
         }
 
         if (custCounter > 0) {
-            UserProductivityData.createUserDeleteReport();
+            UsersData.createUserDeleteReport();
             helpers.getCustDeleteSucsMesg(selectedCustomer);
         } else {
             menuMintAlertLab.setText(rb.getString("sqlConnErrStmt"));

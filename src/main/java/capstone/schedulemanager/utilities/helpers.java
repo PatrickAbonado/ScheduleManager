@@ -1,16 +1,10 @@
 package capstone.schedulemanager.utilities;
 
-import capstone.schedulemanager.dao.UserProductivityData;
-import capstone.schedulemanager.dao.UsersData;
 import capstone.schedulemanager.model.Appointments;
 import capstone.schedulemanager.model.Customers;
-import capstone.schedulemanager.model.Users;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.ZoneId;

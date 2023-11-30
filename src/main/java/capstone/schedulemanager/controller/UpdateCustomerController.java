@@ -262,7 +262,7 @@ public class UpdateCustomerController implements Initializable {
             updateCustMsgLab.setText(rb.getString("sqlConnErrStmt"));
         }
         else{
-            UserProductivityData.createUserUpdateReport();
+            UsersData.createUserUpdateReport();
             helpers.saveSuccessMessage(rb.getString("custSvdMessg"));
         }
 
@@ -339,7 +339,7 @@ public class UpdateCustomerController implements Initializable {
 
 
             if(check > 0){
-                UserProductivityData.createUserDeleteReport();
+                UsersData.createUserDeleteReport();
                 helpers.getAptDeleteSucsMesg(appointment);
             }
             else{

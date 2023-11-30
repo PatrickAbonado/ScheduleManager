@@ -157,7 +157,7 @@ public class AddCustomerController implements Initializable  {
 
 
         if (check > 0){
-            UserProductivityData.createUserCreateReport();
+            UsersData.createUserCreateReport();
             helpers.saveSuccessMessage(rb.getString("custSvdMessg"));
         }
 
@@ -270,7 +270,7 @@ public class AddCustomerController implements Initializable  {
                         aptCheckCntr = AppointmentsData.deleteAppointment(aptList.get(i).getAppointmentId());
                     }
                     if (aptCheckCntr > 0){
-                        UserProductivityData.createUserDeleteReport();
+                        UsersData.createUserDeleteReport();
                         helpers.getAptDeleteSucsMesg(aptToDel);
                     }
                 }
@@ -287,7 +287,7 @@ public class AddCustomerController implements Initializable  {
         }
 
         if(custCounter > 0){
-            UserProductivityData.createUserDeleteReport();
+            UsersData.createUserDeleteReport();
             helpers.getCustDeleteSucsMesg(selectedCustomer);
         }
         else{
