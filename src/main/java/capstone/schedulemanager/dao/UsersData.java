@@ -146,11 +146,11 @@ public abstract class UsersData {
 
                 }
 
-                int deleteinit = 0;
+                int deleteInit = 0;
                 if(userReportType.equals("DELETED")){
 
                     deletedMapTotal.put(userId,
-                            deletedMapTotal.getOrDefault(userId, deleteinit) + 1);
+                            deletedMapTotal.getOrDefault(userId, deleteInit) + 1);
 
                 }
 

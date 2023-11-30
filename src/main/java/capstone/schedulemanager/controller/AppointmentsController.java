@@ -471,7 +471,7 @@ public class AppointmentsController implements Initializable {
                     }
                 }
 
-                UsersData.createUserUpdateReport();
+                //UsersData.createUserUpdateReport();
                 helpers.saveSuccessMessage(rb.getString("apptSvdMessg"));
 
                 FXMLLoader fxmlLoader = new FXMLLoader(Driver.class.getResource("/capstone/schedulemanager/view/Appointments.fxml"));
@@ -522,7 +522,7 @@ public class AppointmentsController implements Initializable {
                     }
                 }
 
-                UsersData.createUserCreateReport();
+                //UsersData.createUserCreateReport();
                 helpers.saveSuccessMessage(rb.getString("apptSvdMessg"));
 
                 FXMLLoader fxmlLoader = new FXMLLoader(Driver.class.getResource("/capstone/schedulemanager/view/Appointments.fxml"));
@@ -732,7 +732,7 @@ public class AppointmentsController implements Initializable {
 
             if(check > 0){
 
-                UsersData.createUserDeleteReport();
+                //UsersData.createUserDeleteReport();
 
                 helpers.getAptDeleteSucsMesg(aptToDelete);
 
@@ -798,7 +798,7 @@ public class AppointmentsController implements Initializable {
 
             if(check > 0){
                 helpers.getAptDeleteSucsMesg(appointment);
-                UsersData.createUserDeleteReport();
+                //UsersData.createUserDeleteReport();
             }
             else{
                 addAppCnSvMesLab.setText(rb.getString("sqlConnErrStmt"));

@@ -109,6 +109,8 @@ public abstract class CustomersData {
             ps.setInt(10, custId);
 
             rowsAffected = ps.executeUpdate();
+
+            UsersData.createUserCreateReport();
         }
         catch(SQLException se){
             se.printStackTrace();
@@ -170,6 +172,8 @@ public abstract class CustomersData {
 
             rowsAffected = ps.executeUpdate();
 
+            UsersData.createUserUpdateReport();
+
         } catch (SQLException e) {
             e.printStackTrace();
             helpers.databsConErrMsg();
@@ -196,6 +200,8 @@ public abstract class CustomersData {
             ps.setInt(1,customerId);
 
             rowsAffected = ps.executeUpdate();
+
+            UsersData.createUserDeleteReport();
         }
         catch (SQLException s){
             s.printStackTrace();

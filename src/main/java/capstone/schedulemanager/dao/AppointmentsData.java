@@ -115,7 +115,10 @@ public abstract class AppointmentsData {
             ps.setInt(12, userId);
             ps.setInt(13, contactId);
             ps.setInt(14, appointmentId);
+
             rowsAffected = ps.executeUpdate();
+
+            UsersData.createUserCreateReport();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -171,6 +174,8 @@ public abstract class AppointmentsData {
 
             rowsAffected = ps.executeUpdate();
 
+            UsersData.createUserUpdateReport();
+
         } catch (SQLException e) {
             e.printStackTrace();
             helpers.databsConErrMsg();
@@ -215,6 +220,10 @@ public abstract class AppointmentsData {
             ps.setInt(1,aptId);
 
             rowsAffected = ps.executeUpdate();
+
+            UsersData.createUserDeleteReport();
+
+
         }
         catch (SQLException s){
             s.printStackTrace();

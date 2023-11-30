@@ -266,7 +266,6 @@ public class MainMenuController implements Initializable {
 
 
             if (check > 0) {
-                UsersData.createUserDeleteReport();
                 helpers.getAptDeleteSucsMesg(appointment);
             } else {
                 menuMintAlertLab.setText(rb.getString("sqlConnErrStmt"));
@@ -338,7 +337,7 @@ public class MainMenuController implements Initializable {
                         aptCheckCntr = AppointmentsData.deleteAppointment(delAptList.get(i).getAppointmentId());
                     }
                     if (aptCheckCntr > 0) {
-                        UsersData.createUserDeleteReport();
+
                         helpers.getAptDeleteSucsMesg(aptToDel);
                     }
                 }
@@ -354,7 +353,7 @@ public class MainMenuController implements Initializable {
         }
 
         if (custCounter > 0) {
-            UsersData.createUserDeleteReport();
+
             helpers.getCustDeleteSucsMesg(selectedCustomer);
         } else {
             menuMintAlertLab.setText(rb.getString("sqlConnErrStmt"));
