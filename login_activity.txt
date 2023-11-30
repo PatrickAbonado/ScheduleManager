@@ -1,6 +1,0 @@
-
-Status: Valid		User ID:2		Time: 2023-11-29T14:33:37
-Status: Valid		User ID:1		Time: 2023-11-29T14:37:02
-Status: Valid		User ID:1		Time: 2023-11-30T08:55:34
-Status: Valid		User ID:1		Time: 2023-11-30T09:11:18
-Status: Valid		User ID:1		Time: 2023-11-30T09:24:01

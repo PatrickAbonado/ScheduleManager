@@ -118,7 +118,7 @@ public class UserProductivityData {
        insertUserTrackData(userId,userName,dateAndTimeDeleted,
                 rb.getString("userProdReportDeleted"));
 
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("user-productivity.txt",true))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("device-user-productivity.txt",true))) {
             bw.write(userId + " " + userName + " " + deleteDateAndTime + " " + rb.getString("userProdReportDeleted") + "\n");
         } catch (IOException e) {
             e.printStackTrace();
@@ -144,7 +144,7 @@ public class UserProductivityData {
         insertUserTrackData(userId,userName,dateAndTimeCreated,
                 rb.getString("userProdReportCreated"));
 
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("user-productivity.txt",true))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("device-user-productivity.txt",true))) {
             bw.write(userId + " " + userName + " " + createDate + " " + rb.getString("userProdReportCreated") + "\n");
         } catch (IOException e) {
             e.printStackTrace();
@@ -168,7 +168,7 @@ public class UserProductivityData {
         insertUserTrackData(userId,userName,lastUpdtString,
                 rb.getString("userProdReportUpdate"));
 
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("user-productivity.txt",true))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("device-user-productivity.txt",true))) {
             bw.write(userId + " " + userName + " " + lastUpdt + " " + rb.getString("userProdReportUpdate") + "\n");
         } catch (IOException e) {
             e.printStackTrace();
