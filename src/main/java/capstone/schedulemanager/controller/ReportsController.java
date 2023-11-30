@@ -71,7 +71,7 @@ public class ReportsController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        ObservableList<capstone.schedulemanager.model.ReportUsrProd> usrProdList = FXCollections.observableArrayList();
+        ObservableList<UserProductivityReport> usrProdList = FXCollections.observableArrayList();
 
         for(int i = 0; i < appointments.size(); ++i){
 
@@ -222,7 +222,7 @@ public class ReportsController implements Initializable {
      *  referenced username, 1 is added to that user's counter of productivity type.
      *  The list is the observable list to be updated with productivity data.
      *  @param list Observable list*/
-    public void makeUsrProductivityList(ObservableList<capstone.schedulemanager.model.ReportUsrProd> list){
+    public void makeUsrProductivityList(ObservableList<UserProductivityReport> list){
 
         Map<Integer, Integer> createdMapTotal = new HashMap<>();
         Map<Integer, Integer> updatedMapTotal = new HashMap<>();
@@ -267,7 +267,7 @@ public class ReportsController implements Initializable {
                 }
             }
 
-            list.add(new ReportUsrProd(user.getUserId(), user.getUserName(),
+            list.add(new UserProductivityReport(user.getUserId(), user.getUserName(),
                     createdTotal, updatedTotal,deletedTotal));
         }
 
