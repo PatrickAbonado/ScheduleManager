@@ -22,7 +22,7 @@ public class UserProductivityData {
     public static int insertUserTrackData(int userId, String userName, String userReportTime, String userReportType){
         int rowsAffected = 0;
 
-        String sql = "INSERT INTO user_tracker (user_id, user_name, user_time, user_report_type) " +
+        String sql = "INSERT INTO user_tracker (user_id, user_name, user_report_time, user_report_type) " +
                 "VALUES (?, ?, ?, ?)";
 
         PreparedStatement ps = null;
@@ -111,12 +111,13 @@ public class UserProductivityData {
 
         LocalDateTime deleteDateAndTime = LocalDateTime.now().withNano(0);
         String dateAndTimeDeleted = deleteDateAndTime.toString();
+        String reportType = rb.getString("userProdReportDeleted");
 
        insertUserTrackData(userId,userName,dateAndTimeDeleted,
-                rb.getString("userProdReportDeleted"));
+               reportType);
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("device-user-productivity.txt",true))) {
-            bw.write(userId + " " + userName + " " + deleteDateAndTime + " " + rb.getString("userProdReportDeleted") + "\n");
+            bw.write(userId + " " + userName + " " + deleteDateAndTime + " " + reportType + "\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -137,12 +138,13 @@ public class UserProductivityData {
         }
         LocalDateTime createDate = LocalDateTime.now().withNano(0);
         String dateAndTimeCreated = createDate.toString();
+        String reportType = rb.getString("userProdReportCreated");
 
         insertUserTrackData(userId,userName,dateAndTimeCreated,
-                rb.getString("userProdReportCreated"));
+                reportType);
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("device-user-productivity.txt",true))) {
-            bw.write(userId + " " + userName + " " + createDate + " " + rb.getString("userProdReportCreated") + "\n");
+            bw.write(userId + " " + userName + " " + createDate + " " + reportType + "\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -161,12 +163,13 @@ public class UserProductivityData {
 
         LocalDateTime lastUpdt = LocalDateTime.now().withNano(0);
         String lastUpdtString = lastUpdt.toString();
+        String reportType = rb.getString("userProdReportUpdate");
 
         insertUserTrackData(userId,userName,lastUpdtString,
-                rb.getString("userProdReportUpdate"));
+                reportType);
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("device-user-productivity.txt",true))) {
-            bw.write(userId + " " + userName + " " + lastUpdt + " " + rb.getString("userProdReportUpdate") + "\n");
+            bw.write(userId + " " + userName + " " + lastUpdt + " " + reportType + "\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
