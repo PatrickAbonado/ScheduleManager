@@ -288,9 +288,6 @@ public class AddCustomerController implements Initializable  {
 
             helpers.getCustDeleteSucsMesg(selectedCustomer);
         }
-        else{
-            addCustSvMsgLab.setText(rb.getString("sqlConnErrStmt"));
-        }
 
         addCustCustIdTex.setText(String.valueOf(CustomersData.getNextCustId()));
 
