@@ -91,8 +91,8 @@ public class AppointmentsController implements Initializable {
     public TableColumn aptCustAptCntNmCol;
     ResourceBundle rb = ResourceBundle.getBundle("Languages", Locale.getDefault());
     private ObservableList<capstone.schedulemanager.model.AptWithName> cstAptsWthNms = FXCollections.observableArrayList();
-    private ObservableList<capstone.schedulemanager.model.AptWithName> aptsWithNameApts = AppointmentsData.getAptsWtNmsList();
-    ObservableList<capstone.schedulemanager.model.Customers> customerList = CustomersData.getCustList();
+    private ObservableList<capstone.schedulemanager.model.AptWithName> aptsWithNameApts = FXCollections.observableArrayList();
+    ObservableList<capstone.schedulemanager.model.Customers> customerList = FXCollections.observableArrayList();
     private static capstone.schedulemanager.model.Appointments aptToUpdate;
     private static boolean isAptUpdtOnly = false;
     ZoneId zid;
@@ -142,7 +142,18 @@ public class AppointmentsController implements Initializable {
         strtHr = helpers.getZoneStrtHrConv(zid);
         endHr = helpers.getZoneEndHrConv(zid);
 
+        aptsWithNameApts = AppointmentsData.getAptsWtNmsList();
+        customerList = CustomersData.getCustList();
+
         if(UpdateCustomerController.getCustToUpdt() != null){
+
+            ObservableList<capstone.schedulemanager.model.Appointments> updatedAppointments = AppointmentsData.getAptList();
+            for (Appointments appointment : updatedAppointments){
+
+                if(appointment.getAppointmentId() == aptToUpdate.getAppointmentId()){
+                    aptToUpdate = appointment;
+                }
+            }
 
             for (AptWithName aptWithName : aptsWithNameApts) {
                 if (aptWithName.getCustomerId() == UpdateCustomerController.getCustToUpdt().getCustomerId()) {
