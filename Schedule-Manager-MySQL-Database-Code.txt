@@ -1,3 +1,5 @@
+CREATE DATABASE IF NOT EXISTS client_schedule;
+
 USE client_schedule;
 
 
