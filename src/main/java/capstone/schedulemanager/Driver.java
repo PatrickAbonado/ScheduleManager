@@ -23,7 +23,6 @@ public class Driver extends Application {
         }
         catch(IOException ioe){
             ioe.printStackTrace();
-            helpers.pageLoadErrMsg();
         }
     }
 
